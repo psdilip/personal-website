@@ -1,0 +1,12 @@
+permissions:
+  id-token: write
+  contents: read
+
+steps:
+  - uses: actions/checkout@v4
+
+  - uses: aws-actions/configure-aws-credentials@v4
+    with:
+      role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+      aws-region: us-east-1
+  - run: aws s3 sync ./website s3://${{ secrets.S3_BUCKET_NAME }} --delete

@@ -100,7 +100,11 @@
       var showQuote = function () {
         quoteEl.style.opacity = 0;
         setTimeout(function () {
-          quoteEl.textContent = "“" + quotes[qi % quotes.length] + "”";
+          var q = quotes[qi % quotes.length];
+          var text = (typeof q === "string") ? q : q.text;
+          var slug = (q && typeof q === "object") ? q.slug : null;
+          var link = slug ? '<a class="arc-quote-link" href="' + slug + '.html">Read the piece →</a>' : "";
+          quoteEl.innerHTML = "“" + text + "”" + link;
           quoteEl.style.opacity = 1;
           qi++;
         }, 260);

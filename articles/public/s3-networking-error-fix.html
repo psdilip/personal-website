@@ -234,6 +234,8 @@ a{ color:inherit; text-decoration:none; }
 .arc-side{ position:sticky; top:86px; display:flex; flex-direction:column; gap:18px; }
 .arc-quote{ font-family:var(--serif); font-style:italic; font-size:15.5px; line-height:1.5; color:var(--ink); min-height:72px;
   padding:16px 18px; border-radius:14px; background:var(--surface); border:1px solid var(--hairline); transition:opacity .3s ease; }
+.arc-quote-link{ display:block; margin-top:10px; font-family:var(--mono); font-style:normal; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); }
+.arc-quote-link:hover{ text-decoration:underline; }
 .arc-search{ width:100%; font-family:var(--sans); font-size:14.5px; padding:11px 14px; border-radius:11px; border:1px solid var(--hairline); background:var(--surface); color:var(--ink); }
 .arc-search::placeholder{ color:#a39da8; }
 .arc-search:focus{ outline:2px solid var(--accent); outline-offset:1px; }
@@ -393,7 +395,11 @@ a{ color:inherit; text-decoration:none; }
       var showQuote = function () {
         quoteEl.style.opacity = 0;
         setTimeout(function () {
-          quoteEl.textContent = "“" + quotes[qi % quotes.length] + "”";
+          var q = quotes[qi % quotes.length];
+          var text = (typeof q === "string") ? q : q.text;
+          var slug = (q && typeof q === "object") ? q.slug : null;
+          var link = slug ? '<a class="arc-quote-link" href="' + slug + '.html">Read the piece →</a>' : "";
+          quoteEl.innerHTML = "“" + text + "”" + link;
           quoteEl.style.opacity = 1;
           qi++;
         }, 260);

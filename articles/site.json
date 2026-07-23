@@ -28,10 +28,10 @@
   },
 
   "quotes": [
-    "Go slow to go fast.",
-    "The bad news is time flies. The good news is you are the pilot.",
-    "You are not what happened to you — you are what you choose to become.",
-    "Struggle, failure, risk, and chaos aren't things to route around. They're the path to getting better."
+    {"text": "Go slow to go fast.", "slug": "starting-out-on-your-aws-journey"},
+    {"text": "The bad news is time flies. The good news is you are the pilot.", "slug": "toastmasters-time"},
+    {"text": "You are not what happened to you — you are what you choose to become.", "slug": "toastmasters-the-story-of"},
+    {"text": "Don't study just to pass the exam — anyone can do that. Study to improve how your company builds things and solve the real problems in front of you.", "slug": "aws-solutions-architect-associate-2019"}
   ],
 
   "social": {

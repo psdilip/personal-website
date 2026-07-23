@@ -231,7 +231,36 @@ html[data-theme="dark"] .btn.primary{color:#08110F;}
 .tags{display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.4rem;}
 .tag{font-family:var(--font-mono); font-size:.68rem; letter-spacing:.04em; color:var(--muted);
   border:1px solid var(--hairline); border-radius:99px; padding:.22rem .55rem;}
+a.tag{transition:border-color .2s ease, color .2s ease;}
+a.tag:hover{border-color:var(--accent); color:var(--accent);}
 .tk-label{font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 .7rem;}
+
+/* ---------- BEYOND THE CLOUD  —  achievement cards ---------- */
+.achieve-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:.8rem;}
+@media (min-width:720px){ .achieve-grid{grid-template-columns:repeat(3,1fr);} }
+.achieve-card{
+  position:relative; overflow:hidden;
+  background:var(--surface); border:1px solid var(--hairline); border-radius:var(--radius);
+  padding:1rem 1.1rem; display:flex; align-items:center;
+  transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.achieve-card::before{content:""; position:absolute; top:0; left:0; right:0; height:3px; background:var(--accent); opacity:.55;}
+.achieve-card:hover{border-color:var(--accent); transform:translateY(-2px); box-shadow:var(--shadow);}
+.achieve-card .at{font-family:var(--font-display); font-weight:600; font-size:.92rem; letter-spacing:-.01em;}
+.achieve-card.feature{
+  grid-column:1 / -1;
+  background:linear-gradient(120deg, var(--accent-tint), transparent 75%);
+  border-color:var(--accent);
+  padding:1.3rem 1.5rem;
+  flex-wrap:wrap; justify-content:space-between; gap:1rem;
+  cursor:pointer;
+}
+.achieve-card.feature::before{display:none;}
+.achieve-card.feature .nums{display:flex; gap:2rem;}
+.achieve-card.feature .num{font-family:var(--font-display); font-weight:700; font-size:2.1rem; color:var(--accent); line-height:1;}
+.achieve-card.feature .num-lab{font-family:var(--font-mono); font-size:.66rem; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; margin-top:.3rem;}
+.achieve-card.feature .cta{font-family:var(--font-mono); font-size:.76rem; color:var(--accent); display:inline-flex; align-items:center; gap:.35rem; white-space:nowrap;}
+.achieve-card.feature:hover{transform:translateY(-2px); box-shadow:var(--shadow);}
 
 /* ---------- EXPERIENCE (typed timeline) ---------- */
 .timeline{position:relative; margin-left:.2rem;}
@@ -318,11 +347,11 @@ footer .fsoc a:hover{color:var(--accent);}
   <a class="brand" href="#top"><span class="dot"></span>Sai Dilip</a>
   <nav>
     <a href="#work" class="hide-sm">Work</a>
-    <a href="#toolkit" class="hide-sm">Toolkit</a>
     <a href="#articles" class="hide-sm">Writing</a>
+    <a href="#certs" class="hide-sm">Certs</a>
+    <a href="#education" class="hide-sm">Education</a>
     <a href="#beyond" class="hide-sm">Beyond</a>
-    <!-- EDIT: point this at your résumé PDF once uploaded to S3 -->
-    <a href="#" >Résumé ↗</a>
+    <a href="#toolkit" class="hide-sm">Toolkit</a>
     <button class="theme-toggle" id="themeBtn" aria-label="Toggle color theme">
       <span id="themeIcon">◐</span><span id="themeLabel">Dark</span>
     </button>
@@ -437,11 +466,141 @@ footer .fsoc a:hover{color:var(--accent);}
     </section>
 
     <!-- ============================================================
+         ARTICLES / WRITING   —   EDIT / duplicate a .linkrow; point href at posts
+         ============================================================ -->
+    <section class="section" id="articles">
+      <div class="section-head reveal">
+        <span class="idx">03</span><h2>Writing</h2>
+      </div>
+      <p class="reveal" style="color:var(--muted); max-width:56ch; margin:-1.2rem 0 1.8rem; font-size:1rem;">
+        I write and publish my own media outlet, <strong style="color:var(--ink);">PassionWaves Media</strong> — cloud engineering write-ups, travel journals, food guides, and public-speaking notes, all in one place. Here's a preview of what's over there.
+      </p>
+      <div class="linklist reveal">
+        <a class="linkrow" href="/articles/articles.html#AWS" target="_blank" rel="noopener">
+          <div class="lmeta"><h3>Cloud &amp; DevOps</h3><span class="lsrc">PASSIONWAVES MEDIA</span></div>
+          <span class="larrow">↗</span>
+        </a>
+        <a class="linkrow" href="/articles/articles.html#Travel" target="_blank" rel="noopener">
+          <div class="lmeta"><h3>Travel Journal</h3><span class="lsrc">PASSIONWAVES MEDIA</span></div>
+          <span class="larrow">↗</span>
+        </a>
+        <a class="linkrow" href="/articles/articles.html#Food" target="_blank" rel="noopener">
+          <div class="lmeta"><h3>Food &amp; Lifestyle</h3><span class="lsrc">PASSIONWAVES MEDIA</span></div>
+          <span class="larrow">↗</span>
+        </a>
+        <a class="linkrow" href="/articles/articles.html#Speaking" target="_blank" rel="noopener">
+          <div class="lmeta"><h3>Public Speaking</h3><span class="lsrc">PASSIONWAVES MEDIA</span></div>
+          <span class="larrow">↗</span>
+        </a>
+        <a class="linkrow" href="/articles/index.html" target="_blank" rel="noopener">
+          <div class="lmeta"><h3>Read everything on PassionWaves Media</h3><span class="lsrc">PASSIONWAVES MEDIA ↗</span></div>
+          <span class="larrow">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CERTIFICATIONS   —   EDIT / duplicate a .chip
+         ============================================================ -->
+    <section class="section" id="certs">
+      <div class="section-head reveal">
+        <span class="idx">04</span><h2>Certifications</h2>
+      </div>
+      <div class="chips reveal">
+        <div class="chip"><span class="ct">Google Cloud — Generative AI Leader</span><span class="cy">2026</span></div>
+        <div class="chip"><span class="ct">AWS Certified Developer — Associate</span><span class="cy">2024</span></div>
+        <div class="chip"><span class="ct">Google Cloud Digital Leader</span><span class="cy">2023</span></div>
+        <div class="chip"><span class="ct">AWS Security — Specialty</span><span class="cy">2022</span></div>
+        <div class="chip"><span class="ct">Microsoft — Azure AI Fundamentals</span><span class="cy">2022</span></div>
+        <div class="chip"><span class="ct">HashiCorp — Vault Associate</span><span class="cy">2021</span></div>
+        <div class="chip"><span class="ct">HashiCorp — Terraform Associate</span><span class="cy">2020</span></div>
+        <div class="chip"><span class="ct">AWS SysOps Administrator — Associate</span><span class="cy">2020</span></div>
+        <div class="chip"><span class="ct">AWS Solutions Architect — Associate</span><span class="cy">2019</span></div>
+        <div class="chip"><span class="ct">Microsoft — Azure Fundamentals</span><span class="cy">2019</span></div>
+        <div class="chip"><span class="ct">AWS Certified Cloud Practitioner</span><span class="cy">2018</span></div>
+        <div class="chip"><span class="ct">CompTIA Security+</span><span class="cy">2016</span></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         EDUCATION   —   EDIT the three cards
+         ============================================================ -->
+    <section class="section" id="education">
+      <div class="section-head reveal">
+        <span class="idx">05</span><h2>Education</h2>
+      </div>
+      <div class="edu reveal">
+        <div class="card">
+          <span class="deg">MS · IN PROGRESS</span>
+          <h3>Technology Management</h3>
+          <p>University of Arizona · 2025 – Present</p>
+        </div>
+        <div class="card">
+          <span class="deg">BS</span>
+          <h3>Information Systems</h3>
+          <p>Neumont University · 2014 – 2017</p>
+        </div>
+        <div class="card">
+          <span class="deg">CREDENTIALS</span>
+          <h3>12 Certifications</h3>
+          <p>Across AWS, Google Cloud, Azure &amp; HashiCorp</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BEYOND THE CLOUD   —   EDIT / duplicate a tag or .achieve-card
+         Personal interests + notable achievements. A few tags/cards
+         link out to matching PassionWaves Media content.
+         ============================================================ -->
+    <section class="section" id="beyond">
+      <div class="section-head reveal">
+        <span class="idx">06</span><h2>Beyond the cloud</h2>
+      </div>
+      <div class="reveal" style="display:grid; gap:1.8rem;">
+        <div>
+          <p class="mono tk-label">Interests</p>
+          <div class="tags">
+            <span class="tag">Photography</span><span class="tag">Film &amp; Video</span><span class="tag">Podcasting</span>
+            <a class="tag" href="/articles/index.html" target="_blank" rel="noopener">Blogging ↗</a>
+            <span class="tag">Running</span><span class="tag">Yoga</span><span class="tag">Tennis</span>
+            <a class="tag" href="/articles/articles.html#Travel" target="_blank" rel="noopener">Travel ↗</a>
+            <span class="tag">Reading</span>
+            <a class="tag" href="/articles/articles.html#Food" target="_blank" rel="noopener">Cooking ↗</a>
+            <span class="tag">Music</span><span class="tag">Gaming</span><span class="tag">League of Legends</span>
+          </div>
+        </div>
+        <div>
+          <p class="mono tk-label">Notable achievements</p>
+          <div class="achieve-grid">
+            <a class="achieve-card feature" href="/articles/articles.html#Travel" target="_blank" rel="noopener">
+              <div class="nums">
+                <div><div class="num">11</div><div class="num-lab">Countries</div></div>
+                <div><div class="num">21</div><div class="num-lab">U.S. States</div></div>
+              </div>
+              <span class="cta">See the trip photos on PassionWaves Media ↗</span>
+            </a>
+            <div class="achieve-card"><span class="at">Podcast Host</span></div>
+            <div class="achieve-card"><span class="at">Eagle Scout</span></div>
+            <div class="achieve-card"><span class="at">Black Belt</span></div>
+            <div class="achieve-card"><span class="at">5K/10K Runner</span></div>
+            <div class="achieve-card"><span class="at">USTA 3.0 Sectionals</span></div>
+            <div class="achieve-card"><span class="at">450-Mile Bike Ride</span></div>
+            <div class="achieve-card"><span class="at">Scuba Diving</span></div>
+            <div class="achieve-card"><span class="at">Sky Diving</span></div>
+            <div class="achieve-card"><span class="at">California Senate Recognition</span></div>
+            <div class="achieve-card"><span class="at">U.S. Congress Recognition</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
          TOOLKIT   —   EDIT groups / tags to match your stack
          ============================================================ -->
     <section class="section" id="toolkit">
       <div class="section-head reveal">
-        <span class="idx">03</span><h2>Toolkit</h2>
+        <span class="idx">07</span><h2>Toolkit</h2>
       </div>
       <div class="reveal" style="display:grid; gap:1.6rem;">
         <div>
@@ -484,114 +643,6 @@ footer .fsoc a:hover{color:var(--accent);}
     </section>
 
     <!-- ============================================================
-         ARTICLES / WRITING   —   EDIT / duplicate a .linkrow; point href at posts
-         ============================================================ -->
-    <section class="section" id="articles">
-      <div class="section-head reveal">
-        <span class="idx">04</span><h2>Writing</h2>
-      </div>
-      <p class="reveal" style="color:var(--muted); max-width:56ch; margin:-1.2rem 0 1.8rem; font-size:1rem;">
-        I write and publish my own media outlet, <strong style="color:var(--ink);">Passionwaves Media</strong> — cloud engineering write-ups, travel journals, food guides, and public-speaking notes, all in one place. Here's a preview of what's over there.
-      </p>
-      <div class="linklist reveal">
-        <a class="linkrow" href="/articles/articles.html#AWS" target="_blank" rel="noopener">
-          <div class="lmeta"><h3>Cloud &amp; DevOps</h3><span class="lsrc">PASSIONWAVES MEDIA</span></div>
-          <span class="larrow">↗</span>
-        </a>
-        <a class="linkrow" href="/articles/articles.html#Travel" target="_blank" rel="noopener">
-          <div class="lmeta"><h3>Travel Journal</h3><span class="lsrc">PASSIONWAVES MEDIA</span></div>
-          <span class="larrow">↗</span>
-        </a>
-        <a class="linkrow" href="/articles/articles.html#Food" target="_blank" rel="noopener">
-          <div class="lmeta"><h3>Food &amp; Lifestyle</h3><span class="lsrc">PASSIONWAVES MEDIA</span></div>
-          <span class="larrow">↗</span>
-        </a>
-        <a class="linkrow" href="/articles/articles.html#Speaking" target="_blank" rel="noopener">
-          <div class="lmeta"><h3>Public Speaking</h3><span class="lsrc">PASSIONWAVES MEDIA</span></div>
-          <span class="larrow">↗</span>
-        </a>
-        <a class="linkrow" href="/articles/index.html" target="_blank" rel="noopener">
-          <div class="lmeta"><h3>Read everything on Passionwaves Media</h3><span class="lsrc">PASSIONWAVES MEDIA ↗</span></div>
-          <span class="larrow">↗</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         BEYOND THE CLOUD   —   EDIT / duplicate a tag under each group
-         Personal interests + notable achievements, carried over from
-         the previous site (Toastmasters, running, podcasting, travel).
-         ============================================================ -->
-    <section class="section" id="beyond">
-      <div class="section-head reveal">
-        <span class="idx">05</span><h2>Beyond the cloud</h2>
-      </div>
-      <div class="reveal" style="display:grid; gap:1.6rem;">
-        <div>
-          <p class="mono tk-label">Interests</p>
-          <div class="tags">
-            <span class="tag">Photography</span><span class="tag">Film &amp; Video</span><span class="tag">Podcasting</span><span class="tag">Blogging</span><span class="tag">Running</span><span class="tag">Yoga</span><span class="tag">Tennis</span><span class="tag">Travel</span><span class="tag">Reading</span><span class="tag">Cooking</span><span class="tag">Music</span><span class="tag">Gaming</span><span class="tag">League of Legends</span>
-          </div>
-        </div>
-        <div>
-          <p class="mono tk-label">Notable achievements</p>
-          <div class="tags">
-            <span class="tag">Podcast Host</span><span class="tag">Eagle Scout</span><span class="tag">Black Belt</span><span class="tag">5K/10K Runner</span><span class="tag">USTA 3.0 Sectionals</span><span class="tag">450-Mile Bike Ride</span><span class="tag">Scuba Diving</span><span class="tag">Sky Diving</span><span class="tag">California Senate Recognition</span><span class="tag">U.S. Congress Recognition</span><span class="tag">11 Countries Visited</span><span class="tag">21 U.S. States Visited</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         CERTIFICATIONS   —   EDIT / duplicate a .chip
-         ============================================================ -->
-    <section class="section" id="certs">
-      <div class="section-head reveal">
-        <span class="idx">06</span><h2>Certifications</h2>
-      </div>
-      <div class="chips reveal">
-        <div class="chip"><span class="ct">Google Cloud — Generative AI Leader</span><span class="cy">2026</span></div>
-        <div class="chip"><span class="ct">AWS Certified Developer — Associate</span><span class="cy">2024</span></div>
-        <div class="chip"><span class="ct">Google Cloud Digital Leader</span><span class="cy">2023</span></div>
-        <div class="chip"><span class="ct">AWS Security — Specialty</span><span class="cy">2022</span></div>
-        <div class="chip"><span class="ct">Microsoft — Azure AI Fundamentals</span><span class="cy">2022</span></div>
-        <div class="chip"><span class="ct">HashiCorp — Vault Associate</span><span class="cy">2021</span></div>
-        <div class="chip"><span class="ct">HashiCorp — Terraform Associate</span><span class="cy">2020</span></div>
-        <div class="chip"><span class="ct">AWS SysOps Administrator — Associate</span><span class="cy">2020</span></div>
-        <div class="chip"><span class="ct">AWS Solutions Architect — Associate</span><span class="cy">2019</span></div>
-        <div class="chip"><span class="ct">Microsoft — Azure Fundamentals</span><span class="cy">2019</span></div>
-        <div class="chip"><span class="ct">AWS Certified Cloud Practitioner</span><span class="cy">2018</span></div>
-        <div class="chip"><span class="ct">CompTIA Security+</span><span class="cy">2016</span></div>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         EDUCATION   —   EDIT the three cards
-         ============================================================ -->
-    <section class="section" id="education">
-      <div class="section-head reveal">
-        <span class="idx">07</span><h2>Education</h2>
-      </div>
-      <div class="edu reveal">
-        <div class="card">
-          <span class="deg">MS · IN PROGRESS</span>
-          <h3>Technology Management</h3>
-          <p>University of Arizona · 2025 – Present</p>
-        </div>
-        <div class="card">
-          <span class="deg">BS</span>
-          <h3>Information Systems</h3>
-          <p>Neumont University · 2014 – 2017</p>
-        </div>
-        <div class="card">
-          <span class="deg">CREDENTIALS</span>
-          <h3>12 Certifications</h3>
-          <p>Across AWS, Google Cloud, Azure &amp; HashiCorp</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================
          CONTACT   —   EDIT your closing line + links
          ============================================================ -->
     <section class="contact" id="contact">
@@ -619,11 +670,11 @@ const SECTIONS = [
   {id:"about",      label:"Intro"},
   {id:"focus",      label:"Focus"},
   {id:"work",       label:"Work"},
-  {id:"toolkit",    label:"Toolkit"},
   {id:"articles",   label:"Writing"},
-  {id:"beyond",     label:"Beyond"},
   {id:"certs",      label:"Certs"},
   {id:"education",  label:"Education"},
+  {id:"beyond",     label:"Beyond"},
+  {id:"toolkit",    label:"Toolkit"},
   {id:"contact",    label:"Contact"}
 ];
 

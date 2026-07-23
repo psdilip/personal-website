@@ -1,482 +1,772 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF=8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Personal Website</title>
-        <link rel="stylesheet" href="style.css">
-        <script src="https://kit.fontawesome.com/947f3092f2.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    </head>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <body>
-        <div class="scroll-up-btn">
-            <i class="fas fa-angle-up"></i>
+<!-- ============================================================
+     EDIT: Page title + description (shows in browser tab & search)
+     ============================================================ -->
+<title>Sai Dilip — Senior AWS Cloud Engineer</title>
+<meta name="description" content="Portfolio of Sai Dilip — Senior AWS Cloud Engineer specializing in multi-account architecture, Terraform IaC, DevSecOps, and cloud cost optimization." />
+
+<!-- Fonts (loaded from Google; strong system fallbacks are set in CSS,
+     so the page still looks right if the fonts ever fail to load) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   DESIGN TOKENS  —  change colors / spacing here once
+   ============================================================ */
+:root{
+  /* light theme */
+  --bg:#F3F4F1;
+  --surface:#FBFBF9;
+  --hairline:#DCDFD9;
+  --ink:#15191B;
+  --muted:#5B6670;
+  --accent:#0B5D63;
+  --accent-strong:#084349;
+  --accent-tint:rgba(11,93,99,.09);
+  --shadow:0 1px 2px rgba(20,25,28,.04), 0 12px 30px -18px rgba(20,25,28,.22);
+
+  --font-display:"Space Grotesk", ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-body:"Newsreader", ui-serif, Georgia, "Times New Roman", serif;
+  --font-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --maxw:1120px;
+  --gutter:clamp(1.25rem, 4vw, 3rem);
+  --rail:96px;              /* width reserved for the pipeline rail on desktop */
+  --radius:14px;
+}
+html[data-theme="dark"]{
+  --bg:#0E1416;
+  --surface:#141C1F;
+  --hairline:#26312F;
+  --ink:#E9EEEA;
+  --muted:#93A2A1;
+  --accent:#34C0B2;
+  --accent-strong:#6FE6DA;
+  --accent-tint:rgba(52,192,178,.12);
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 18px 40px -22px rgba(0,0,0,.7);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:1.0625rem;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  transition:background .4s ease, color .4s ease;
+}
+h1,h2,h3,h4{font-family:var(--font-display); font-weight:600; line-height:1.08; margin:0;}
+a{color:inherit; text-decoration:none;}
+p{margin:0 0 1rem;}
+::selection{background:var(--accent-tint);}
+
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin:0 0 1rem;
+}
+.mono{font-family:var(--font-mono);}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 var(--gutter);}
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+.topbar{
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:.9rem var(--gutter);
+  border-bottom:1px solid transparent;
+  transition:background .3s ease, border-color .3s ease, backdrop-filter .3s ease;
+}
+.topbar.scrolled{
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter:saturate(150%) blur(10px);
+  border-bottom:1px solid var(--hairline);
+}
+.brand{font-family:var(--font-display); font-weight:700; font-size:1rem; letter-spacing:-.01em; display:flex; align-items:center; gap:.6rem;}
+.brand .dot{width:9px; height:9px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px var(--accent-tint);}
+.topbar nav{display:flex; align-items:center; gap:1.4rem;}
+.topbar nav a{font-family:var(--font-mono); font-size:.8rem; color:var(--muted); transition:color .2s ease;}
+.topbar nav a:hover{color:var(--ink);}
+.theme-toggle{
+  border:1px solid var(--hairline); background:var(--surface); color:var(--ink);
+  font-family:var(--font-mono); font-size:.72rem; letter-spacing:.06em;
+  padding:.45rem .7rem; border-radius:99px; cursor:pointer; display:flex; align-items:center; gap:.45rem;
+  transition:border-color .2s ease, color .2s ease;
+}
+.theme-toggle:hover{border-color:var(--accent);}
+@media (max-width:640px){ .topbar nav .hide-sm{display:none;} }
+
+/* ============================================================
+   LAYOUT  —  content sits to the right of the pipeline rail
+   ============================================================ */
+.shell{position:relative;}
+main{ max-width:var(--maxw); margin:0 auto; padding:0 var(--gutter) 4rem; }
+@media (min-width:1024px){
+  main{ padding-left:calc(var(--gutter) + var(--rail)); }
+}
+
+/* ============================================================
+   PIPELINE RAIL  (the signature element)  —  desktop only
+   ============================================================ */
+.rail{
+  display:none;
+  position:fixed; top:0; bottom:0; left:max(var(--gutter), calc((100vw - var(--maxw))/2 + var(--gutter)));
+  width:var(--rail); z-index:20;
+  align-items:center;
+  pointer-events:none;
+}
+.rail-inner{position:relative; height:min(70vh,560px); width:100%;}
+.rail-track{position:absolute; left:9px; top:0; bottom:0; width:2px; background:var(--hairline); border-radius:2px;}
+.rail-fill{position:absolute; left:9px; top:0; width:2px; height:0; background:var(--accent); border-radius:2px; transition:height .15s linear;}
+.rail-node{
+  position:absolute; left:0; transform:translateY(-50%);
+  display:flex; align-items:center; gap:.7rem;
+  pointer-events:auto; cursor:pointer;
+}
+.rail-node .pip{
+  width:20px; height:20px; border-radius:50%;
+  border:2px solid var(--hairline); background:var(--bg);
+  display:grid; place-items:center; transition:border-color .25s ease, background .25s ease;
+}
+.rail-node .pip::after{content:""; width:6px; height:6px; border-radius:50%; background:var(--hairline); transition:background .25s ease, transform .25s ease;}
+.rail-node .rlabel{
+  font-family:var(--font-mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted); opacity:0; transform:translateX(-6px); transition:opacity .25s ease, transform .25s ease, color .25s ease;
+  white-space:nowrap;
+}
+.rail-node:hover .rlabel{opacity:1; transform:translateX(0);}
+.rail-node.active .pip{border-color:var(--accent); background:var(--accent);}
+.rail-node.active .pip::after{background:var(--surface); transform:scale(1.1);}
+.rail-node.active .rlabel{opacity:1; transform:translateX(0); color:var(--accent);}
+@media (min-width:1024px){ .rail{display:flex;} }
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section{padding:clamp(3.5rem,8vw,7rem) 0 0;}
+.section-head{display:flex; align-items:baseline; gap:1rem; margin-bottom:2.2rem; flex-wrap:wrap;}
+.section-head h2{font-size:clamp(1.5rem,3vw,2.2rem); letter-spacing:-.02em;}
+.section-head .idx{font-family:var(--font-mono); font-size:.8rem; color:var(--muted);}
+
+/* ---------- HERO ---------- */
+.hero{position:relative; padding-top:clamp(2.5rem,7vw,5.5rem);}
+.hero h1{
+  font-size:clamp(2.5rem,6.2vw,5rem);
+  letter-spacing:-.03em; font-weight:700;
+  margin:.3rem 0 1.4rem; max-width:16ch;
+}
+.hero .lede{font-size:clamp(1.15rem,2vw,1.4rem); color:var(--ink); max-width:52ch; margin-bottom:1.1rem;}
+.hero .sub{color:var(--muted); max-width:56ch;}
+.hero-actions{display:flex; flex-wrap:wrap; gap:.8rem; margin-top:2rem;}
+.btn{
+  font-family:var(--font-mono); font-size:.82rem; letter-spacing:.02em;
+  padding:.7rem 1.15rem; border-radius:99px; border:1px solid var(--hairline);
+  background:var(--surface); color:var(--ink); cursor:pointer;
+  display:inline-flex; align-items:center; gap:.5rem;
+  transition:border-color .2s ease, background .2s ease, color .2s ease, transform .2s ease;
+}
+.btn:hover{border-color:var(--accent); transform:translateY(-2px);}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:#fff;}
+html[data-theme="dark"] .btn.primary{color:#08110F;}
+.btn.primary:hover{background:var(--accent-strong); border-color:var(--accent-strong);}
+.btn .arrow{transition:transform .2s ease;}
+.btn:hover .arrow{transform:translate(2px,-2px);}
+
+/* flowing-current motif behind hero (canvas flow field) */
+.hero-motif{position:absolute; inset:0; z-index:-1; overflow:hidden; pointer-events:none;
+  -webkit-mask-image:radial-gradient(120% 95% at 82% -8%, #000 22%, transparent 74%);
+  mask-image:radial-gradient(120% 95% at 82% -8%, #000 22%, transparent 74%);}
+.hero-motif canvas{display:block; width:100%; height:100%;}
+
+/* impact stats band */
+.stats{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--hairline);
+  border:1px solid var(--hairline); border-radius:var(--radius); overflow:hidden; margin-top:clamp(2.5rem,6vw,4rem);}
+@media(min-width:720px){ .stats{grid-template-columns:repeat(4,1fr);} }
+.stat{background:var(--surface); padding:1.5rem 1.3rem; transition:background .25s ease;}
+.stat:hover{background:var(--accent-tint);}
+.stat .num{font-family:var(--font-display); font-weight:700; font-size:clamp(1.8rem,4vw,2.6rem); letter-spacing:-.02em; color:var(--accent); line-height:1;}
+.stat .lab{font-family:var(--font-mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-top:.5rem;}
+
+/* ---------- FOCUS PILLARS ---------- */
+.grid{display:grid; gap:1px; background:var(--hairline); border:1px solid var(--hairline); border-radius:var(--radius); overflow:hidden;}
+.pillars{grid-template-columns:repeat(2,1fr);}
+@media (min-width:820px){ .pillars{grid-template-columns:repeat(4,1fr);} }
+.pillar{background:var(--surface); padding:1.6rem 1.4rem 1.8rem; transition:background .25s ease;}
+.pillar:hover{background:var(--accent-tint);}
+.pillar .pn{font-family:var(--font-mono); font-size:.72rem; color:var(--accent); letter-spacing:.1em;}
+.pillar h3{font-size:1.05rem; margin:.6rem 0 .5rem; letter-spacing:-.01em;}
+.pillar p{font-size:.95rem; color:var(--muted); margin:0;}
+
+/* ---------- SELECTED WORK ---------- */
+.work{display:grid; gap:1rem; grid-template-columns:1fr;}
+@media (min-width:720px){ .work{grid-template-columns:1fr 1fr;} }
+.card{
+  background:var(--surface); border:1px solid var(--hairline); border-radius:var(--radius);
+  padding:1.6rem; display:flex; flex-direction:column; gap:.6rem;
+  transition:border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+.card:hover{border-color:var(--accent); transform:translateY(-3px); box-shadow:var(--shadow);}
+.card .ctop{display:flex; align-items:center; justify-content:space-between; gap:1rem;}
+.card h3{font-size:1.15rem; letter-spacing:-.01em;}
+.card .carrow{color:var(--muted); transition:color .2s ease, transform .2s ease;}
+.card:hover .carrow{color:var(--accent); transform:translate(3px,-3px);}
+.card p{color:var(--muted); font-size:.98rem; margin:0;}
+.tags{display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.4rem;}
+.tag{font-family:var(--font-mono); font-size:.68rem; letter-spacing:.04em; color:var(--muted);
+  border:1px solid var(--hairline); border-radius:99px; padding:.22rem .55rem;}
+.tk-label{font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 .7rem;}
+
+/* ---------- EXPERIENCE (typed timeline) ---------- */
+.timeline{position:relative; margin-left:.2rem;}
+.tl-item{position:relative; padding:0 0 2.2rem 1.7rem; border-left:2px solid var(--hairline);}
+.tl-item:last-child{border-left-color:transparent; padding-bottom:0;}
+.tl-item::before{content:""; position:absolute; left:-7px; top:.35rem; width:12px; height:12px; border-radius:50%;
+  background:var(--bg); border:2px solid var(--accent);}
+.tl-item .when{font-family:var(--font-mono); font-size:.74rem; color:var(--muted); letter-spacing:.03em;}
+.tl-item h3{font-size:1.1rem; margin:.25rem 0 .1rem; letter-spacing:-.01em;}
+.tl-item .org{color:var(--accent); font-family:var(--font-display); font-weight:500; font-size:.95rem;}
+.tl-item p{color:var(--muted); font-size:.96rem; margin:.5rem 0 0;}
+
+/* ---------- WRITING / LINKS LIST ---------- */
+.linklist{border-top:1px solid var(--hairline);}
+.linkrow{
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  padding:1.15rem .2rem; border-bottom:1px solid var(--hairline);
+  transition:padding-left .25s ease;
+}
+.linkrow:hover{padding-left:.8rem;}
+.linkrow .lmeta{display:flex; flex-direction:column; gap:.15rem;}
+.linkrow h3{font-size:1.05rem; letter-spacing:-.01em;}
+.linkrow .lsrc{font-family:var(--font-mono); font-size:.72rem; color:var(--muted); letter-spacing:.05em;}
+.linkrow .larrow{color:var(--muted); transition:color .2s ease, transform .2s ease;}
+.linkrow:hover .larrow{color:var(--accent); transform:translate(3px,-3px);}
+
+/* ---------- CERTIFICATIONS ---------- */
+.chips{display:flex; flex-wrap:wrap; gap:.7rem;}
+.chip{
+  background:var(--surface); border:1px solid var(--hairline); border-radius:var(--radius);
+  padding:.9rem 1.1rem; display:flex; flex-direction:column; gap:.15rem; min-width:200px;
+  transition:border-color .2s ease, transform .2s ease;
+}
+.chip:hover{border-color:var(--accent); transform:translateY(-2px);}
+.chip .ct{font-family:var(--font-display); font-weight:600; font-size:.98rem;}
+.chip .cy{font-family:var(--font-mono); font-size:.72rem; color:var(--muted);}
+
+/* ---------- EDUCATION ---------- */
+.edu{display:grid; gap:1rem; grid-template-columns:1fr;}
+@media (min-width:720px){ .edu{grid-template-columns:repeat(3,1fr);} }
+.edu .card p{margin-top:.2rem;}
+.edu .deg{font-family:var(--font-mono); font-size:.72rem; color:var(--accent); letter-spacing:.05em;}
+
+/* ---------- CONTACT / FOOTER ---------- */
+.contact{padding:clamp(3.5rem,8vw,6rem) 0 0;}
+.contact h2{font-size:clamp(1.8rem,4vw,2.8rem); letter-spacing:-.02em; max-width:16ch;}
+.contact p{color:var(--muted); max-width:48ch; margin-top:1rem;}
+footer{margin-top:4rem; border-top:1px solid var(--hairline); padding:1.6rem 0 2.4rem;
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;}
+footer .fnote{font-family:var(--font-mono); font-size:.74rem; color:var(--muted);}
+footer .fsoc{display:flex; gap:1.2rem;}
+footer .fsoc a{font-family:var(--font-mono); font-size:.78rem; color:var(--muted); transition:color .2s ease;}
+footer .fsoc a:hover{color:var(--accent);}
+
+/* ============================================================
+   MOTION  —  scroll reveal + hero load  (reduced-motion safe)
+   ============================================================ */
+.reveal{opacity:0; transform:translateY(18px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
+.reveal.in{opacity:1; transform:none;}
+.stagger>*{opacity:0; transform:translateY(14px); animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards;}
+.stagger>*:nth-child(1){animation-delay:.05s;}
+.stagger>*:nth-child(2){animation-delay:.16s;}
+.stagger>*:nth-child(3){animation-delay:.27s;}
+.stagger>*:nth-child(4){animation-delay:.38s;}
+.stagger>*:nth-child(5){animation-delay:.49s;}
+@keyframes rise{to{opacity:1; transform:none;}}
+
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px;}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .reveal,.stagger>*{opacity:1 !important; transform:none !important; animation:none !important; transition:none !important;}
+  .rail-fill{transition:none;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     TOP BAR   —   EDIT nav labels / anchors here
+     ============================================================ -->
+<header class="topbar" id="topbar">
+  <a class="brand" href="#top"><span class="dot"></span>Sai Dilip</a>
+  <nav>
+    <a href="#work" class="hide-sm">Work</a>
+    <a href="#toolkit" class="hide-sm">Toolkit</a>
+    <a href="#articles" class="hide-sm">Writing</a>
+    <a href="#beyond" class="hide-sm">Beyond</a>
+    <!-- EDIT: point this at your résumé PDF once uploaded to S3 -->
+    <a href="#" >Résumé ↗</a>
+    <button class="theme-toggle" id="themeBtn" aria-label="Toggle color theme">
+      <span id="themeIcon">◐</span><span id="themeLabel">Dark</span>
+    </button>
+  </nav>
+</header>
+
+<div class="shell">
+
+  <!-- ===== PIPELINE RAIL (auto-built by script; edit node labels in the JS SECTIONS list) ===== -->
+  <aside class="rail" aria-hidden="true"><div class="rail-inner" id="railInner">
+    <div class="rail-track"></div>
+    <div class="rail-fill" id="railFill"></div>
+  </div></aside>
+
+  <main id="top">
+
+    <!-- ============================================================
+         HERO   —   EDIT your headline & intro
+         ============================================================ -->
+    <section class="hero" id="about">
+      <div class="hero-motif" aria-hidden="true">
+        <canvas id="heroCanvas"></canvas>
+      </div>
+      <div class="stagger">
+        <p class="eyebrow">AWS Cloud Engineering · DevSecOps · FinOps</p>
+        <h1>I build AWS platforms that scale securely — and stay accountable.</h1>
+        <p class="lede">Senior Cloud Engineer with 8+ years designing, automating, and governing enterprise infrastructure across multi-account AWS Organizations.</p>
+        <p class="sub">A dual lens: hands-on architect and client-facing technical lead. Terraform IaC, CI/CD, and security built in from the ground up — the same proactive discipline that once caught a ~$1M cloud overcharge before the billing cycle closed.</p>
+        <!-- <div class="hero-actions"> -->
+          <!-- <a class="btn primary" href="#work">See selected work <span class="arrow">↗</span></a> -->
+          <!-- EDIT: your links -->
+          <!-- <a class="btn" href="https://linkedin.com/in/your-handle">LinkedIn</a> -->
+          <!-- <a class="btn" href="mailto:you@example.com">Email</a> -->
+          <!-- <a class="btn" href="https://github.com/your-handle">GitHub</a> -->
+        <!-- </div> -->
+      </div>
+    </section>
+
+    <!-- ============================================================
+         IMPACT   —   quick stats. EDIT numbers/labels to taste.
+         ============================================================ -->
+    <section id="impact" class="reveal">
+      <div class="stats">
+        <div class="stat"><div class="num">8+</div><div class="lab">Years in cloud</div></div>
+        <div class="stat"><div class="num">~$1M</div><div class="lab">Overcharge prevented</div></div>
+        <div class="stat"><div class="num">12</div><div class="lab">Certifications</div></div>
+        <div class="stat"><div class="num">3</div><div class="lab">Clouds · AWS·GCP·Azure</div></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FOCUS PILLARS   —   EDIT the four things you're known for
+         ============================================================ -->
+    <section class="section" id="focus">
+      <div class="section-head reveal">
+        <span class="idx">01</span><h2>What I do</h2>
+      </div>
+      <div class="grid pillars reveal">
+        <div class="pillar">
+          <span class="pn">A</span>
+          <h3>Multi-Account AWS Architecture</h3>
+          <p>Landing zones with AWS Organizations, IAM Identity Center, and Service Control Policies — secure, centrally governed, cross-account by design.</p>
         </div>
-        <nav class="navbar">
-            <div class="max-width">
-                <div class="logo"><a href="#">Portfolio.</a></div>
-                <ul class="menu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Certifications</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#teams">Tools</a></li>
-                    <li><a href="#interests">Interests</a></li>
-                    <li><a href="#publications">Publications</a></li>
-                    <li><a href="#notable">Notable</a></li>
-                </ul>
-                <div class="menu-btn">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </div>
-        </nav>
+        <div class="pillar">
+          <span class="pn">B</span>
+          <h3>Infrastructure as Code &amp; CI/CD</h3>
+          <p>Terraform, CloudFormation, and AWS CDK with GitOps. Reusable, auditable modules and automated pipelines that make deployments repeatable.</p>
+        </div>
+        <div class="pillar">
+          <span class="pn">C</span>
+          <h3>Cloud Security &amp; Compliance</h3>
+          <p>Security Hub, GuardDuty, and AWS Config with DevSecOps baked into delivery — aligned to NIST CSF, CIS Benchmarks, and SOC 2.</p>
+        </div>
+        <div class="pillar">
+          <span class="pn">D</span>
+          <h3>FinOps &amp; Cost Optimization</h3>
+          <p>Usage analysis, anomaly detection, and right-sizing that turn cloud spend into a managed line item — including a ~$1M overcharge caught early.</p>
+        </div>
+      </div>
+    </section>
 
-        <!-- home section  -->
-        <section class="home" id="home">
-            <div class="max-width">
-                <div class="home-content">
-                    <div class="text-1">Hello, my name is </div>
-                    <div class="text-2">Sai Dilip Ponnaganti</div>
-                    <div class="text-3">I'm a <span class="typing"></span></div>
-                    <!-- <a href="#">Hire me</a> -->
-                </div>
-            </div>
-        </section>
+    <!-- ============================================================
+         SELECTED WORK   —   EDIT / duplicate a .card per project
+         NOTE: keep client names out unless you have approval.
+         ============================================================ -->
+    <section class="section" id="work">
+      <div class="section-head reveal">
+        <span class="idx">02</span><h2>Selected work</h2>
+      </div>
+      <div class="work">
+        <a class="card reveal" href="#">
+          <div class="ctop"><h3>~$1M Overcharge, Prevented</h3><span class="carrow">↗</span></div>
+          <p>Proactively monitored an enterprise customer's usage, detected an unimplemented cost-control feature, and alerted them before the billing cycle closed — protecting roughly a million dollars in cloud budget.</p>
+          <div class="tags"><span class="tag">FinOps</span><span class="tag">Cost anomaly</span><span class="tag">Enterprise</span></div>
+        </a>
+        <a class="card reveal" href="#">
+          <div class="ctop"><h3>Enterprise AWS Landing Zones</h3><span class="carrow">↗</span></div>
+          <p>Designed secure, scalable multi-account environments with AWS Organizations, IAM Identity Center, and cross-account trust models — centralized governance for enterprise cloud from day one.</p>
+          <div class="tags"><span class="tag">AWS Organizations</span><span class="tag">IAM Identity Center</span><span class="tag">SCPs</span></div>
+        </a>
+        <a class="card reveal" href="#">
+          <div class="ctop"><h3>On-Prem → AWS Migrations</h3><span class="carrow">↗</span></div>
+          <p>Delivered end-to-end enterprise migrations with Terraform and AWS Application Migration Service across financial services, education, and SaaS — improving scalability, resilience, and deployment consistency.</p>
+          <div class="tags"><span class="tag">Terraform</span><span class="tag">AWS MGN</span><span class="tag">Migration</span></div>
+        </a>
+        <a class="card reveal" href="#">
+          <div class="ctop"><h3>Industrial IoT Predictive Platform</h3><span class="carrow">↗</span></div>
+          <p>Architected secure AWS infrastructure for an oil-pipeline monitoring platform — scalable data collection, AI/ML-driven analytics, and real-time operational visibility.</p>
+          <div class="tags"><span class="tag">IoT Core</span><span class="tag">AI/ML</span><span class="tag">Real-time</span></div>
+        </a>
+      </div>
+    </section>
 
-        <!-- about section  -->
+    <!-- ============================================================
+         TOOLKIT   —   EDIT groups / tags to match your stack
+         ============================================================ -->
+    <section class="section" id="toolkit">
+      <div class="section-head reveal">
+        <span class="idx">03</span><h2>Toolkit</h2>
+      </div>
+      <div class="reveal" style="display:grid; gap:1.6rem;">
+        <div>
+          <p class="mono tk-label">AWS Services</p>
+          <div class="tags">
+            <span class="tag">EC2</span><span class="tag">Lambda</span><span class="tag">S3</span><span class="tag">DynamoDB</span><span class="tag">ECS</span><span class="tag">IAM Identity Center</span><span class="tag">Security Hub</span><span class="tag">GuardDuty</span><span class="tag">AWS Config</span><span class="tag">Organizations</span><span class="tag">SCPs</span><span class="tag">KMS</span><span class="tag">WAF</span><span class="tag">IoT Core</span><span class="tag">CodePipeline</span>
+          </div>
+        </div>
+        <div>
+          <p class="mono tk-label">Infrastructure as Code</p>
+          <div class="tags">
+            <span class="tag">Terraform</span><span class="tag">Terraform Cloud</span><span class="tag">CloudFormation</span><span class="tag">AWS CDK</span><span class="tag">Serverless Framework</span><span class="tag">GitOps</span><span class="tag">Landing Zones</span>
+          </div>
+        </div>
+        <div>
+          <p class="mono tk-label">DevSecOps &amp; CI/CD</p>
+          <div class="tags">
+            <span class="tag">Azure DevOps</span><span class="tag">Jenkins</span><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Helm</span><span class="tag">Harness</span><span class="tag">Bitbucket</span>
+          </div>
+        </div>
+        <div>
+          <p class="mono tk-label">Security &amp; Compliance</p>
+          <div class="tags">
+            <span class="tag">Zero Trust</span><span class="tag">NIST CSF</span><span class="tag">CIS Benchmarks</span><span class="tag">SOC 2</span><span class="tag">IAM Governance</span><span class="tag">CSPM</span>
+          </div>
+        </div>
+        <div>
+          <p class="mono tk-label">Monitoring &amp; Ops</p>
+          <div class="tags">
+            <span class="tag">CloudWatch</span><span class="tag">Datadog</span><span class="tag">Dynatrace</span><span class="tag">SignalFx</span><span class="tag">CloudHealth</span><span class="tag">ServiceNow</span><span class="tag">New Relic</span>
+          </div>
+        </div>
+        <div>
+          <p class="mono tk-label">Languages &amp; Platforms</p>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">C# / .NET</span><span class="tag">JavaScript</span><span class="tag">SQL</span><span class="tag">Shell</span><span class="tag">AWS</span><span class="tag">GCP</span><span class="tag">Azure</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <section class="about" id="about">
-            <div class="max-width">
-                <h2 class="title">About Me</h2>
-                <div class="about-content">
-                    <div class="column-left">
-                        <img src="images/profile-1.JPG" alt="">
+    <!-- ============================================================
+         ARTICLES / WRITING   —   EDIT / duplicate a .linkrow; point href at posts
+         ============================================================ -->
+    <section class="section" id="articles">
+      <div class="section-head reveal">
+        <span class="idx">04</span><h2>Writing</h2>
+      </div>
+      <div class="linklist reveal">
+        <a class="linkrow" href="https://medium.com/sai-ops" target="_blank" rel="noopener">
+          <div class="lmeta"><h3>Sai Ops</h3><span class="lsrc">MEDIUM · CLOUD &amp; DEVOPS</span></div>
+          <span class="larrow">↗</span>
+        </a>
+        <a class="linkrow" href="https://medium.com/nomadic-trails-with-sai" target="_blank" rel="noopener">
+          <div class="lmeta"><h3>Nomadic Trails with Sai</h3><span class="lsrc">MEDIUM · TRAVEL</span></div>
+          <span class="larrow">↗</span>
+        </a>
+        <a class="linkrow" href="https://medium.com/vegan-living-with-sai" target="_blank" rel="noopener">
+          <div class="lmeta"><h3>Vegan Living with Sai</h3><span class="lsrc">MEDIUM · LIFESTYLE</span></div>
+          <span class="larrow">↗</span>
+        </a>
+        <a class="linkrow" href="https://medium.com/masteryspeak-a-toastmasters-journey" target="_blank" rel="noopener">
+          <div class="lmeta"><h3>A Toastmasters Journey</h3><span class="lsrc">MEDIUM · PUBLIC SPEAKING</span></div>
+          <span class="larrow">↗</span>
+        </a>
+      </div>
+    </section>
 
-                    </div>
-                    <div class="column right">
-                        <div class="text">
-                            <span>Versatile and Adventurous</span>
-                        </div>
-                        <br>
+    <!-- ============================================================
+         BEYOND THE CLOUD   —   EDIT / duplicate a tag under each group
+         Personal interests + notable achievements, carried over from
+         the previous site (Toastmasters, running, podcasting, travel).
+         ============================================================ -->
+    <section class="section" id="beyond">
+      <div class="section-head reveal">
+        <span class="idx">05</span><h2>Beyond the cloud</h2>
+      </div>
+      <div class="reveal" style="display:grid; gap:1.6rem;">
+        <div>
+          <p class="mono tk-label">Interests</p>
+          <div class="tags">
+            <span class="tag">Photography</span><span class="tag">Film &amp; Video</span><span class="tag">Podcasting</span><span class="tag">Blogging</span><span class="tag">Running</span><span class="tag">Yoga</span><span class="tag">Tennis</span><span class="tag">Travel</span><span class="tag">Reading</span><span class="tag">Cooking</span><span class="tag">Music</span><span class="tag">Gaming</span><span class="tag">League of Legends</span>
+          </div>
+        </div>
+        <div>
+          <p class="mono tk-label">Notable achievements</p>
+          <div class="tags">
+            <span class="tag">Podcast Host</span><span class="tag">Eagle Scout</span><span class="tag">Black Belt</span><span class="tag">5K/10K Runner</span><span class="tag">USTA 3.0 Sectionals</span><span class="tag">450-Mile Bike Ride</span><span class="tag">Scuba Diving</span><span class="tag">Sky Diving</span><span class="tag">California Senate Recognition</span><span class="tag">U.S. Congress Recognition</span><span class="tag">11 Countries Visited</span><span class="tag">21 U.S. States Visited</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                        <p><b>Right now, I am:</b></p>
-                        <ul>
-                            <li>Facilitating companies in initiating their Cloud Transformation</li>
-                            <li>Preserving unforgettable moments through Photography</li>
-                            <li>Producing engaging content through Video and Audio Creation</li>
-                            <li>Sharing expertise and insights through writing</li>
-                            <li>Fostering dialogue and promoting collaboration through conversational initiatives</li>
-                            <li>Exploring new horizons and cultures through travel and adventure</li>
-                            <li>Enjoying Tennis, League of Legends as a leisure activity for recreation and relaxation</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- ============================================================
+         CERTIFICATIONS   —   EDIT / duplicate a .chip
+         ============================================================ -->
+    <section class="section" id="certs">
+      <div class="section-head reveal">
+        <span class="idx">06</span><h2>Certifications</h2>
+      </div>
+      <div class="chips reveal">
+        <div class="chip"><span class="ct">Google Cloud — Generative AI Leader</span><span class="cy">2026</span></div>
+        <div class="chip"><span class="ct">AWS Certified Developer — Associate</span><span class="cy">2024</span></div>
+        <div class="chip"><span class="ct">Google Cloud Digital Leader</span><span class="cy">2023</span></div>
+        <div class="chip"><span class="ct">AWS Security — Specialty</span><span class="cy">2022</span></div>
+        <div class="chip"><span class="ct">Microsoft — Azure AI Fundamentals</span><span class="cy">2022</span></div>
+        <div class="chip"><span class="ct">HashiCorp — Vault Associate</span><span class="cy">2021</span></div>
+        <div class="chip"><span class="ct">HashiCorp — Terraform Associate</span><span class="cy">2020</span></div>
+        <div class="chip"><span class="ct">AWS SysOps Administrator — Associate</span><span class="cy">2020</span></div>
+        <div class="chip"><span class="ct">AWS Solutions Architect — Associate</span><span class="cy">2019</span></div>
+        <div class="chip"><span class="ct">Microsoft — Azure Fundamentals</span><span class="cy">2019</span></div>
+        <div class="chip"><span class="ct">AWS Certified Cloud Practitioner</span><span class="cy">2018</span></div>
+        <div class="chip"><span class="ct">CompTIA Security+</span><span class="cy">2016</span></div>
+      </div>
+    </section>
 
-         <!-- Services  -->
+    <!-- ============================================================
+         EDUCATION   —   EDIT the three cards
+         ============================================================ -->
+    <section class="section" id="education">
+      <div class="section-head reveal">
+        <span class="idx">07</span><h2>Education</h2>
+      </div>
+      <div class="edu reveal">
+        <div class="card">
+          <span class="deg">MS · IN PROGRESS</span>
+          <h3>Technology Management</h3>
+          <p>University of Arizona · 2025 – Present</p>
+        </div>
+        <div class="card">
+          <span class="deg">BS</span>
+          <h3>Information Systems</h3>
+          <p>Neumont University · 2014 – 2017</p>
+        </div>
+        <div class="card">
+          <span class="deg">CREDENTIALS</span>
+          <h3>12 Certifications</h3>
+          <p>Across AWS, Google Cloud, Azure &amp; HashiCorp</p>
+        </div>
+      </div>
+    </section>
 
-         <section class="services" id="services">
-            <div class = "max-width">
-                <h2 class="title">Certifications</h2>
-                    <div class="services-content">
-                        <div class="card">
-                                <a href="https://www.credly.com/users/sai-dilip-ponnaganti/badges" class="no-decoration">
-                                    <div class="box">
-                                            <div class="text">5x AWS</div>
-                                    </div>
-                                </a>
-                            </div>
-            
+    <!-- ============================================================
+         CONTACT   —   EDIT your closing line + links
+         ============================================================ -->
+    <section class="contact" id="contact">
+      <h2 class="reveal">Let's build cloud infrastructure that scales.</h2>
+      <p class="reveal">Open to Senior AWS Cloud Engineer and DevOps roles where deep technical execution meets real stakeholder impact.</p>
+      <!-- <div class="hero-actions reveal"> -->
+        <!-- <a class="btn primary" href="mailto:you@example.com">Email me <span class="arrow">↗</span></a> -->
+        <!-- <a class="btn" href="https://linkedin.com/in/your-handle">LinkedIn</a> -->
+      <!-- </div> -->
 
-                       <div class="card">
-                            <a href="https://www.credly.com/users/sai-dilip-ponnaganti/badges" class="no-decoration">
-                                <div class="box">
-                                        <div class="text">2x Azure</div>
-                                </div>
-                            </a>
-                        </div>
+      <footer>
+        <span class="fnote">© <span id="year"></span> Sai Dilip</span>
+      </footer>
+    </section>
 
-                        <div class="card">
-                            <a href="https://www.credly.com/users/sai-dilip-ponnaganti/badges" class="no-decoration">
-                                <div class="box">
-                                        <div class="text">2x Terraform</div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card">
-                            <a href="https://www.credly.com/users/sai-dilip-ponnaganti/badges" class="no-decoration">
-                                <div class="box">
-                                        <div class="text">1x GCP</div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card">
-                            <a href="https://www.credly.com/users/sai-dilip-ponnaganti/badges" class="no-decoration">
-                                <div class="box">
-                                        <div class="text">1x CompTia Security+</div>
-                                </div>
-                            </a>
-                        </div>
-                   </div>
-            </div> 
-        </section>
+  </main>
+</div>
 
-        <!-- Skills  -->
+<script>
+/* ============================================================
+   1. SECTION MAP for the pipeline rail
+      EDIT: keep this in sync with your section ids + labels
+   ============================================================ */
+const SECTIONS = [
+  {id:"about",      label:"Intro"},
+  {id:"focus",      label:"Focus"},
+  {id:"work",       label:"Work"},
+  {id:"toolkit",    label:"Toolkit"},
+  {id:"articles",   label:"Writing"},
+  {id:"beyond",     label:"Beyond"},
+  {id:"certs",      label:"Certs"},
+  {id:"education",  label:"Education"},
+  {id:"contact",    label:"Contact"}
+];
 
-        <section class="skills" id="skills">
-            <div class = "max-width">
-                <h2 class="title">My Skills</h2>
-                    <div class="skills-content">
-                        <div class="column left">
-                            <div class="text"> Summary </div>
-                                <p>
-                                I have worked in the cloud industry for nearly 6 years with a focus in the IoT space. 
-                                Ever since I was introduced to Cloud, I was interested in its capabilities and possible applications as a solution to various current problems.
-                                I like to go above and beyond in the projects I work on, and understand the full architecture of how the each piece of the puzzle is applied. 
-                                I am currently learning new technologies and indulging in activities outside of work that enable me to develop my creativity and live through purpose.
-                                </p>
-                        </div>
-                        <div class="column right">
-                            <div class = "bars">
-                                <div class="info">
-                                    <span>AWS</span>
-                                    <span>80%</span>
-                                </div>
-                                <div class="line aws"></div>
-                            </div>
-                            <div class = "bars">
-                                <div class="info">
-                                    <span>Terraform</span>
-                                    <span>60%</span>
-                                </div>
-                                <div class="line terraform"></div>
-                            </div>
-                            <div class = "bars">
-                                <div class="info">
-                                    <span>Python</span>
-                                    <span>50%</span>
-                                </div>
-                                <div class="line python"></div>
-                            </div>
-                            <div class = "bars">
-                                <div class="info">
-                                    <span>Azure</span>
-                                    <span>20%</span>
-                                </div>
-                                <div class="line azure"></div>
-                            </div>
-                            <div class = "bars">
-                                <div class="info">
-                                    <span>GCP</span>
-                                    <span>20%</span>
-                                </div>
-                                <div class="line gcp"></div>
-                            </div>
-                        </div>
+/* build rail nodes, evenly spaced */
+const railInner = document.getElementById("railInner");
+SECTIONS.forEach((s,i)=>{
+  const top = (i/(SECTIONS.length-1))*100;
+  const node = document.createElement("a");
+  node.href = "#"+s.id;
+  node.className = "rail-node";
+  node.dataset.id = s.id;
+  node.style.top = top+"%";
+  node.innerHTML = `<span class="pip"></span><span class="rlabel">${s.label}</span>`;
+  railInner.appendChild(node);
+});
+const nodes = [...document.querySelectorAll(".rail-node")];
+const railFill = document.getElementById("railFill");
 
-                    </div>
-            </div> 
-        </section>
+/* ============================================================
+   2. Scroll: fill rail, mark active node, top-bar shadow
+   ============================================================ */
+const topbar = document.getElementById("topbar");
+function onScroll(){
+  const h = document.documentElement;
+  const p = h.scrollTop / (h.scrollHeight - h.clientHeight || 1);
+  railFill.style.height = Math.min(100, p*100) + "%";
+  topbar.classList.toggle("scrolled", h.scrollTop > 12);
+}
+document.addEventListener("scroll", onScroll, {passive:true});
+onScroll();
 
-        <!-- teams section -->
-        <section class="teams" id="teams">
-            <div class="max-width">
-                <h2 class="title"> Tools </h2>
-                <div class="carousel owl-carousel">
-                    <div class="card">
-                        <div class="box">
-                            <img src="images/cloud.jpg" alt="">
-                            <div class="text">Cloud Technologies</div>
-                            <br>
-                            <p>Amazon Web Services</p>
-                            <p>Azure</p>
-                            <p>Google Cloud Provider</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="box">
-                            <img src="images/code.png" alt="">
-                            <div class="text">Infrastructure as Code</div>
-                            <br>
-                            <p>Cloudformation</p>
-                            <p>Terraform</p>
-                            <p>AWS CDK Python</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="box">
-                            <img src="images/cycle.png" alt="">
-                            <div class="text">CI/CD</div>
-                            <br>
-                            <p>Jenkins</p>
-                            <p>AWS Codepipeline</p>
-                            <p>Azure Pipelines</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="box">
-                            <img src="images/repo.png" alt="">
-                            <div class="text">Code Repositories</div>
-                            <br>
-                            <p>AWS Codecommit</p>
-                            <p>Github</p>
-                            <p>Gitlab</p>
-                            <p>Bitbucket</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="box">
-                            <img src="images/film.png" alt="">
-                            <div class="text">Photography and Film</div>
-                            <br>
-                            <p>Lightroom Classic</p>
-                            <p>Photoshop</p>
-                            <p>iMovie</p>
-                            <p>DaVinci Resolve</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+/* highlight the section currently in view */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      nodes.forEach(n=>n.classList.toggle("active", n.dataset.id===e.target.id));
+    }
+  });
+},{rootMargin:"-45% 0px -45% 0px"});
+SECTIONS.forEach(s=>{ const el=document.getElementById(s.id); if(el) io.observe(el); });
 
-        <!-- Interests  -->
-        <section class="interests" id="interests">
-            <div class = "max-width">
-                <h2 class="title">My Interests</h2>
-                    <div class="interests-content">
-                        <div class="carousel owl-carousel">
-                        
-                            <div class="card">
-                                    <div class="box">
-                                        <i class="fas fa-code"></i>
-                                            <div class="text">Coding</div>
-                                    </div>
-                            </div>
-                            <div class="card">
-                                    <div class="box">
-                                        <i class="fa-solid fa-book"></i>
-                                            <div class="text">Reading Books</div>
-                                    </div>
+/* ============================================================
+   3. Scroll-reveal for .reveal elements
+   ============================================================ */
+const revObs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); revObs.unobserve(e.target); } });
+},{rootMargin:"0px 0px -8% 0px", threshold:.08});
+document.querySelectorAll(".reveal").forEach(el=>revObs.observe(el));
 
-                                </div>
-                                <div class="card">
-                                    <div class="box">
-                                        <i class="fa-solid fa-person-walking"></i>
-                                            <div class="text">Yoga</div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="box">
-                                        <i class="fa-solid fa-person-running"></i>
-                                            <div class="text">Running</div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="box">
-                                        <i class="fa-sharp fa-solid fa-music"></i>
-                                            <div class="text">Music</div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="box">
-                                        <i class="fa-solid fa-photo-film"></i>
-                                            <div class="text">Content Creation</div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="box">
-                                        <i class="fa-solid fa-blog"></i>
-                                            <div class="text">Blogging</div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="box">
-                                        <i class="fa-sharp fa-solid fa-utensils"></i>
-                                            <div class="text">Cooking</div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="box">
-                                        <i class="fa-sharp fa-solid fa-headset"></i>
-                                            <div class="text">Gaming</div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="box">
-                                        <i class="fa-sharp fa-solid fa-plane"></i>
-                                            <div class="text">Travel</div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="box">
-                                        <i class="fa-sharp fa-solid fa-camera"></i>
-                                            <div class="text">Photography</div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="box">
-                                        <i class="fa-solid fa-podcast"></i>
-                                            <div class="text">Podcasting</div>
-                                    </div>
-                                </div>
-                        </div>
-                   </div>
-            </div> 
-        </section>
+/* ============================================================
+   4. Theme toggle (starts from OS preference; session-only)
+      To persist across visits on your live site, uncomment the
+      localStorage lines below. (localStorage is disabled inside
+      the Claude preview, so it's left off here.)
+   ============================================================ */
+const root = document.documentElement;
+const btnLabel = document.getElementById("themeLabel");
+const btnIcon = document.getElementById("themeIcon");
+function applyTheme(t){
+  root.setAttribute("data-theme", t);
+  btnLabel.textContent = t==="dark" ? "Light" : "Dark";
+  btnIcon.textContent  = t==="dark" ? "◑" : "◐";
+  // localStorage.setItem("theme", t);
+}
+const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+// const saved = localStorage.getItem("theme");
+applyTheme(/* saved || */ (prefersDark ? "dark" : "light"));
+document.getElementById("themeBtn").addEventListener("click", ()=>{
+  applyTheme(root.getAttribute("data-theme")==="dark" ? "light" : "dark");
+});
 
-                <!-- teams section -->
-            <section class="publications" id="publications">
-                    <div class="max-width">
-                        <h2 class="title"> Publications </h2>
-                        <div class="carousel owl-carousel">
+/* ============================================================
+   5. Hero motif — a slow flowing current (canvas flow field)
+      Thin streamlines drift through a smooth vector field,
+      evoking data in motion. Low-contrast and masked so it
+      melts into the page; frozen to one still frame when the
+      visitor prefers reduced motion.
+      TUNE: DENSITY (spacing), CALM (drift speed), FADE (opacity)
+   ============================================================ */
+(function(){
+  const canvas = document.getElementById("heroCanvas");
+  if(!canvas) return;
+  const ctx = canvas.getContext("2d");
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-                            <div class="card">
-                                <a href="https://medium.com/nomadic-trails-with-sai" class="no-decoration">
-                                    <div class="box">
-                                        <img src="images/travel.png" alt="">
-                                        <div class="text">Nomadic Trails with Sai</div>
-                                        <br>
-                                        <p>A travel blog to embark on a journey of endless exploration</p>
-                                    </div>
-                                </a>
-                            </div>
+  const CALM = 0.0016;   // how fast the field drifts (lower = calmer)
+  const FADE = 0.085;    // line opacity (lower = more subtle)
 
-                            <div class="card">
-                                <a href="https://medium.com/vegan-living-with-sai" class="no-decoration">
+  let W=0, H=0, dpr=1, seeds=[], stroke="#0B5D63", t=2.2, raf=0;
 
-                                    <div class="box">
+  function readColor(){
+    stroke = getComputedStyle(document.documentElement)
+      .getPropertyValue("--accent").trim() || "#0B5D63";
+  }
+  function resize(){
+    const r = canvas.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = Math.max(1, r.width); H = Math.max(1, r.height);
+    canvas.width = W*dpr; canvas.height = H*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    // jittered grid of streamline start points (DENSITY)
+    seeds = [];
+    const gap = Math.max(58, Math.min(W,H)/7);
+    for(let x=-gap; x<W+gap; x+=gap){
+      for(let y=-gap; y<H+gap; y+=gap){
+        seeds.push([x + (Math.random()-.5)*gap*0.6, y + (Math.random()-.5)*gap*0.6]);
+      }
+    }
+  }
+  // smooth, dependency-free vector field (layered waves)
+  function angle(x,y){
+    const nx=x/W, ny=y/H;
+    return (Math.sin(nx*3.1 + t) + Math.cos(ny*3.4 - t*0.8) + Math.sin((nx+ny)*2.2 + t*0.5)) * 1.15;
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle = stroke;
+    ctx.lineWidth = 1.1;
+    ctx.lineCap = "round";
+    ctx.globalAlpha = FADE;
+    const steps = 40, len = Math.max(3, Math.min(W,H)/150);
+    for(let s=0; s<seeds.length; s++){
+      let x = seeds[s][0], y = seeds[s][1];
+      ctx.beginPath();
+      ctx.moveTo(x,y);
+      for(let i=0;i<steps;i++){
+        const a = angle(x,y);
+        x += Math.cos(a)*len;
+        y += Math.sin(a)*len;
+        ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+  function loop(){ t += CALM; draw(); raf = requestAnimationFrame(loop); }
+  function start(){
+    readColor(); resize();
+    if(reduce){ draw(); }              // one elegant still frame
+    else { cancelAnimationFrame(raf); loop(); }
+  }
+  window.addEventListener("resize", ()=>{ resize(); if(reduce) draw(); });
+  // re-read the accent when the theme flips
+  const tb = document.getElementById("themeBtn");
+  if(tb) tb.addEventListener("click", ()=>setTimeout(()=>{ readColor(); if(reduce) draw(); }, 0));
+  start();
+})();
 
-                                        <img src="images/vegan.png" alt="">
-                                        <div class="text">Vegan Living with Sai</div>
-                                        <br>
-                                        <p>A lifestyle blog that explores the vegan path</p>
-                                    </div>
-                                </a>
-
-                            </div>
-                            <div class="card">
-                                <a href="https://medium.com/sai-ops" class="no-decoration">
-                                    <div class="box">
-                                        <img src="images/cloud.png" alt="">
-                                        <div class="text">Sai Ops</div>
-                                        <br>
-                                        <p>A technical blog that aims to communicate and explain various technologies in Cloud Computing</p>
-
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="card">
-                                <a href="https://medium.com/masteryspeak-a-toastmasters-journey" class="no-decoration">
-                                    <div class="box">
-                                        <img src="images/toastmasters.png" alt="">
-                                        <div class="text">A Toastmasters Journey</div>
-                                        <br>
-                                        <p>Focusing on the development of public speaking skills and the journey of honing one’s eloquence through the Toastmasters program</p>
-
-                                    </div>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-             </section>
-
-        <section class="notable" id="notable">
-            <div class = "max-width">
-                <h2 class="title">Notable Undertakings</h2>
-                    <div class="notable-content">
-                        <div class="card">
-                            <a href="https://dbhs.wvusd.k12.ca.us/apps/news/article/325244" class="no-decoration">
-                                <div class="box">
-                                        <div class="text">Eagle Scout</div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card">
-                            <a href="http://www.tuxbro.com/results/2018/dash1810K.html" class="no-decoration">
-                                <div class="box">
-                                        <div class="text">5/10k Run</div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card">
-                                <div class="box">
-                                        <div class="text">California Senate Recognition</div>
-                                </div>
-                        </div>
-                        <div class="card">
-                                <div class="box">
-                                        <div class="text">450 Mile Bike Ride</div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="card">
-                                <div class="box">
-                                        <div class="text">Scuba Diving</div>
-                                </div>
-                        </div>
-                        <div class="card">
-                                <div class="box">
-                                        <div class="text">Sky Diving</div>
-                                </div>
-                        </div>
-                        <div class="card">
-                            <div class="box">
-                                    <div class="text">Podcast Host</div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="box">
-                                    <div class="text">USTA 3.0 Sectionals</div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="box">
-                                    <div class="text">Black Belt</div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="box">
-                                    <div class="text">Congress Recognition</div>
-                            </div>
-                    </div>
-                        <div class="card">
-                            <div class="box">
-                                    <div class="text"> 11 Countries</div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="box">
-                                    <div class="text"> 21 U.S. States</div>
-                            </div>
-                        </div>
-                   </div>
-            </div> 
-        </section>
-
-        
-
-        <!-- footer section -->
-        <footer>
-            <span>Created By <a href="#"> Sai Dilip Ponnaganti | Designed By CodingNepal</a> | <span class="far fa-copyright"></span> 2023 All Rights Reserved. </span>
-        </footer>
-
-        <script src="script.js"></script>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PF90YPY6M"></script>
-            <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-3PF90YPY6M');
-        </script>
-
-    </body>
+/* footer year */
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
 </html>

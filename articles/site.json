@@ -1,0 +1,46 @@
+{
+  "domain": "https://example.com",
+  "brandName": "PassionWavesMedia",
+  "author": { "name": "Your Name", "role": "PassionWavesMedia" },
+
+  "hero": {
+    "eyebrow": "PassionWavesMedia · Est. 2026",
+    "titleHtml": "Spreading what I <span class=\"hl\">love</span>, from me to you.",
+    "lede": "One place for the things I can't stop thinking about — the cloud, the road, the kitchen, and everything I'm still figuring out. If a piece here teaches you something or nudges you to start, it did its job."
+  },
+
+  "mission": {
+    "heading": "Passions, sent out in waves.",
+    "body": [
+      "PassionWavesMedia is exactly what it sounds like — a way to send the things I care about out into the world and see who they reach. Some pieces will teach you how to do something. Some will take you somewhere. All of them are meant to leave you a little more curious than you were.",
+      "It starts with writing. Over time it'll grow into other forms of media, too — but the goal never changes: inspire someone, help someone, pass along something worth knowing."
+    ],
+    "sig": "— and if it lands with even one person, that's a wave worth making."
+  },
+
+  "categories": {
+    "AWS":      "#6B4EE6",
+    "Travel":   "#22B0C4",
+    "How-To":   "#FF6B4A",
+    "Food":     "#E5468A",
+    "Life":     "#F2A93B",
+    "Speaking": "#3BB273"
+  },
+
+  "social": {
+    "linkedin": "https://www.linkedin.com/in/your-handle",
+    "x": "https://x.com/your-handle"
+  },
+
+  "newsletter": {
+    "enabled": true,
+    "_comment": "Paste your provider's form-action URL here. Empty = signup shows a friendly note but does nothing. See README for the 5-minute setup.",
+    "action": ""
+  },
+
+  "supabase": {
+    "_comment": "Fill these to turn on real likes + view counts. Empty = likes still work locally per-browser, views hidden. See README.",
+    "url": "",
+    "anonKey": ""
+  }
+}

@@ -1,7 +1,8 @@
 ---
-title: "Feast Without Meat: Eastvale's Vegan Options"
+title: "Vegan Guide to Eastvale"
 slug: vegan-eastvale-guide
 category: Food
+tags: Vegan, Eastvale, Restaurants
 excerpt: Eight Eastvale spots with real vegan orders worth making the trip for, from ramen to a beyond-sausage sandwich.
 date: 2023-08-08
 ---

@@ -1,13 +1,13 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>"Toastmasters Prepared Speech: Rocky (Rap Song)" — PassionWavesMedia</title>
+<title>"Rocky (Rap Song)" — PassionWavesMedia</title>
 <meta name="description" content="What my dog Rocky has taught me about awareness, presence, and taking a break — delivered as a rap, because a blog post dared me to.">
 <link rel="canonical" href="https://example.com/toastmasters-rocky-rap.html">
-<meta property="og:title" content="&quot;Toastmasters Prepared Speech: Rocky (Rap Song)&quot; — PassionWavesMedia">
+<meta property="og:title" content="&quot;Rocky (Rap Song)&quot; — PassionWavesMedia">
 <meta property="og:description" content="What my dog Rocky has taught me about awareness, presence, and taking a break — delivered as a rap, because a blog post dared me to.">
 <meta property="og:image" content="https://example.com/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "\"Toastmasters Prepared Speech: Rocky (Rap Song)\"", "datePublished": "2023-03-22", "author": {"@type": "Person", "name": "Your Name"}, "publisher": {"@type": "Organization", "name": "PassionWavesMedia"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "\"Rocky (Rap Song)\"", "datePublished": "2023-03-22", "author": {"@type": "Person", "name": "Your Name"}, "publisher": {"@type": "Organization", "name": "PassionWavesMedia"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>:root{
   --bg:#FCFAF7; --surface:#FFFFFF; --ink:#1D1A22; --muted:#6E6A73; --hairline:#ECE7E1;
@@ -87,13 +87,26 @@ a{ color:inherit; text-decoration:none; }
 .readmore::after{ content:" \2192"; }
 
 .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-.card{ background:var(--surface); border:1px solid var(--hairline); border-radius:16px; padding:26px 24px; display:flex; flex-direction:column; min-height:216px; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.card{ background:var(--surface); border:1px solid var(--hairline); border-radius:16px; padding:0; display:flex; flex-direction:column; overflow:hidden; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
 .card:hover{ transform:translateY(-3px); box-shadow:0 14px 36px rgba(29,26,34,0.08); border-color:#ded9d2; }
-.card h3{ font-family:var(--serif); font-weight:500; font-size:22px; line-height:1.22; letter-spacing:-0.01em; margin:12px 0 10px; }
-.card p{ color:var(--muted); font-size:15px; margin:0; flex:1; }
-.card .foot{ margin-top:18px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.card-body{ padding:18px 20px 20px; display:flex; flex-direction:column; flex:1; }
+.card h3{ font-family:var(--serif); font-weight:500; font-size:20px; line-height:1.26; letter-spacing:-0.01em; margin:10px 0 8px; }
+.card p{ color:var(--muted); font-size:14.5px; margin:0; flex:1; }
+.card .foot{ margin-top:16px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
 .card .stat{ display:inline-flex; align-items:center; gap:6px; }
 .card .stat svg{ width:14px; height:14px; opacity:0.7; }
+
+/* ---------- thumbnails + tags (cards, archive) ---------- */
+.c-thumb{ position:relative; width:100%; aspect-ratio:16/10; background:var(--hairline); overflow:hidden; flex:0 0 auto; }
+.c-thumb img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease; }
+.card:hover .c-thumb img{ transform:scale(1.04); }
+.c-thumb-fallback{ display:none; position:absolute; inset:0; align-items:center; justify-content:center; text-align:center;
+  background:linear-gradient(155deg, color-mix(in srgb, var(--tc,#999) 22%, var(--surface)), color-mix(in srgb, var(--tc,#999) 6%, var(--surface))); }
+.c-thumb-fallback span{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:color-mix(in srgb, var(--tc,#999) 75%, var(--ink)); padding:0 18px; }
+.c-thumb--fallback .c-thumb-fallback{ display:flex; }
+.c-thumb--fallback img{ display:none; }
+.tags{ display:flex; flex-wrap:wrap; gap:6px; margin:2px 0 0; }
+.tagchip{ font-family:var(--mono); font-size:10.5px; letter-spacing:.04em; color:var(--muted); background:var(--bg); border:1px solid var(--hairline); border-radius:999px; padding:3px 9px; white-space:nowrap; }
 
 /* ---------- Mission ---------- */
 .mission{ border-top:1px solid var(--hairline); }
@@ -215,14 +228,33 @@ a{ color:inherit; text-decoration:none; }
 .nav a.navlink::after{ content:""; position:absolute; left:0; right:0; bottom:-5px; height:2px; border-radius:2px; background:var(--grad); background-size:200% 100%; transform:scaleX(0); transform-origin:left; transition:transform .28s ease; }
 .nav a.navlink:hover::after{ transform:scaleX(1); animation:sheen 6s ease-in-out infinite alternate; }
 
-/* ---------- archive / all-articles page ---------- */
-.cat-group{ margin-bottom:52px; }
-.cat-head{ display:flex; align-items:center; gap:11px; font-family:var(--serif); font-weight:500; font-size:24px; letter-spacing:-0.01em; margin:0 0 20px; scroll-margin-top:90px; }
-.cat-head .dot{ width:11px; height:11px; border-radius:50%; }
-.cat-count{ font-family:var(--mono); font-size:12px; letter-spacing:0.08em; color:var(--muted); font-weight:400; }
-.card.extra{ display:none; }
-.show-more{ margin-top:22px; font-family:var(--sans); font-size:14.5px; font-weight:500; color:var(--ink); background:transparent; border:1px solid var(--hairline); border-radius:999px; padding:10px 20px; cursor:pointer; transition:border-color .18s ease; }
-.show-more:hover{ border-color:var(--ink); }
+/* ---------- archive / all-articles page (sidebar navigator) ---------- */
+.arc-section{ padding-top:44px; }
+.arc-layout{ display:grid; grid-template-columns:248px 1fr; gap:44px; align-items:start; }
+.arc-side{ position:sticky; top:86px; display:flex; flex-direction:column; gap:18px; }
+.arc-quote{ font-family:var(--serif); font-style:italic; font-size:15.5px; line-height:1.5; color:var(--ink); min-height:72px;
+  padding:16px 18px; border-radius:14px; background:var(--surface); border:1px solid var(--hairline); transition:opacity .3s ease; }
+.arc-search{ width:100%; font-family:var(--sans); font-size:14.5px; padding:11px 14px; border-radius:11px; border:1px solid var(--hairline); background:var(--surface); color:var(--ink); }
+.arc-search::placeholder{ color:#a39da8; }
+.arc-search:focus{ outline:2px solid var(--accent); outline-offset:1px; }
+.arc-nav{ display:flex; flex-direction:column; gap:2px; }
+.arc-navbtn{ display:flex; align-items:center; justify-content:space-between; gap:8px; width:100%; font-family:var(--sans); font-size:14px; font-weight:500;
+  color:var(--muted); background:transparent; border:none; text-align:left; padding:9px 10px; border-radius:9px; cursor:pointer; transition:background .15s ease, color .15s ease; }
+.arc-navbtn:hover{ background:rgba(29,26,34,.05); color:var(--ink); }
+.arc-navbtn.active{ background:var(--ink); color:#fff; }
+.arc-navbtn .lbl{ display:flex; align-items:center; gap:8px; }
+.arc-navbtn .dot{ width:7px; height:7px; border-radius:50%; flex:0 0 auto; }
+.arc-navbtn .n{ font-family:var(--mono); font-size:10.5px; opacity:.65; }
+.arc-sortwrap{ display:flex; flex-direction:column; gap:6px; }
+.arc-sortwrap label{ font-size:10.5px; }
+.arc-sort{ font-family:var(--sans); font-size:13.5px; padding:9px 10px; border-radius:9px; border:1px solid var(--hairline); background:var(--surface); color:var(--ink); }
+.arc-heading{ display:flex; align-items:baseline; justify-content:space-between; gap:14px; margin-bottom:18px; }
+.arc-heading h2{ font-family:var(--serif); font-weight:500; font-size:24px; margin:0; letter-spacing:-.01em; }
+.arc-heading span{ font-family:var(--mono); font-size:11.5px; color:var(--muted); }
+.arc-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+.arc-empty{ color:var(--muted); padding:60px 0; text-align:center; font-size:15px; }
+@media (max-width:980px){ .arc-layout{ grid-template-columns:1fr; } .arc-side{ position:static; } .arc-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:620px){ .arc-grid{ grid-template-columns:1fr; } }
 .more-cta{ display:flex; justify-content:center; margin-top:40px; }
 .nav a.navlink.active{ color:var(--ink); }
 </style></head><body><header class="masthead"><div class="wrap masthead-inner"><a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 16" fill="none"><path d="M2 10 q3 -6 6 0 t6 0 t6 0" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></span><span class="brand-text">PassionWavesMedia</span></a><nav class="nav"><a class="navlink" href="articles.html">Read</a><a class="navlink" href="index.html#mission">About</a><a href="index.html#subscribe"><button class="btn btn-grad" style="padding:9px 18px;font-size:14.5px">Subscribe</button></a></nav></div></header>
@@ -230,7 +262,7 @@ a{ color:inherit; text-decoration:none; }
   <div class="article a-head">
     <a href="index.html#read" class="back">← All articles</a>
     <div class="kicker mono"><span class="dot" style="background:#3BB273"></span>Speaking · 1 min read · 22 Mar 2023</div>
-    <h1>"Toastmasters Prepared Speech: Rocky (Rap Song)"</h1>
+    <h1>"Rocky (Rap Song)"</h1>
     <p class="dek">What my dog Rocky has taught me about awareness, presence, and taking a break — delivered as a rap, because a blog post dared me to.</p>
     <div class="byline"><div class="avatar"></div><div class="who"><b>Your Name</b><br><span>PassionWavesMedia</span></div></div>
   </div>
@@ -257,7 +289,7 @@ a{ color:inherit; text-decoration:none; }
   <div class="footer-top">
     <div><a href="index.html" class="brand brand--sm"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 16" fill="none"><path d="M2 10 q3 -6 6 0 t6 0 t6 0" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></span><span class="brand-text">PassionWavesMedia</span></a><p class="colophon">Spreading passions from me to the world — one article, one wave, at a time.</p></div>
     <nav>
-      <div class="col"><h4>Read</h4><a href="articles.html">All articles</a><a href="articles.html#AWS">AWS</a><a href="articles.html#Travel">Travel</a><a href="articles.html#How-To">How-To</a><a href="articles.html#Food">Food</a><a href="articles.html#Life">Life</a><a href="articles.html#Speaking">Speaking</a></div>
+      <div class="col"><h4>Read</h4><a href="articles.html">All articles</a><a href="articles.html#AWS">AWS</a><a href="articles.html#Travel">Travel</a><a href="articles.html#How-To">How-To</a><a href="articles.html#Food">Food</a><a href="articles.html#Speaking">Speaking</a></div>
       <div class="col"><h4>More</h4><a href="index.html#mission">About</a><a href="index.html#subscribe">Subscribe</a></div>
       <div class="col"><h4>Elsewhere</h4><a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 0h4.78v2.19h.07c.67-1.27 2.3-2.61 4.73-2.61 5.06 0 6 3.33 6 7.66V24h-5v-6.99c0-1.67-.03-3.82-2.33-3.82-2.33 0-2.69 1.82-2.69 3.7V24h-5V8z"/></svg>LinkedIn</a><a href="https://x.com/your-handle" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2H21l-6.55 7.48L22 22h-6.15l-4.82-6.3L5.5 22H2.74l7.01-8-7.4-12h6.3l4.36 5.77L18.24 2zm-1.08 18h1.7L7.02 3.9H5.2L17.16 20z"/></svg>X</a></div>
     </nav>
@@ -346,23 +378,108 @@ a{ color:inherit; text-decoration:none; }
       }
     });
   };
-  window.pwArchiveFilter = function (btn, cat) {
-    document.querySelectorAll(".filters .chip").forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
-    btn.setAttribute("aria-pressed", "true");
-    document.querySelectorAll(".cat-group").forEach(function (g) {
-      g.style.display = (cat === "all" || g.dataset.cat === cat) ? "" : "none";
-    });
-  };
-  window.pwShowMore = function (btn) {
-    var g = btn.closest(".cat-group"); if (!g) return;
-    g.querySelectorAll(".card.extra").forEach(function (c) { c.classList.remove("extra"); });
-    btn.remove();
-  };
-  window.pwArchiveInit = function () {
-    var h = decodeURIComponent((location.hash || "").replace("#", "")); if (!h) return;
-    var chip = [].slice.call(document.querySelectorAll(".filters .chip"))
-      .filter(function (x) { return x.textContent.trim().toLowerCase() === h.toLowerCase(); })[0];
-    if (chip) chip.click();
+  /* ---------- sidebar navigator (articles.html) ---------- */
+  window.pwArchiveInitV2 = function () {
+    var gridEl = document.getElementById("arcGrid");
+    if (!gridEl) return;
+    var posts = window.PW_POSTS || [];
+    var cats = window.PW_CATS || {};
+    var quotes = window.PW_QUOTES || [];
+    var catNames = Object.keys(cats);
+
+    var state = { q: "", cat: "All", sort: "new" };
+    var initHash = decodeURIComponent((location.hash || "").replace("#", ""));
+    if (initHash && catNames.indexOf(initHash) !== -1) state.cat = initHash;
+
+    /* rotating quote */
+    var quoteEl = document.getElementById("arcQuote");
+    if (quoteEl && quotes.length) {
+      var qi = 0;
+      var showQuote = function () {
+        quoteEl.style.opacity = 0;
+        setTimeout(function () {
+          quoteEl.textContent = "“" + quotes[qi % quotes.length] + "”";
+          quoteEl.style.opacity = 1;
+          qi++;
+        }, 260);
+      };
+      showQuote();
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduce && quotes.length > 1) setInterval(showQuote, 7000);
+    } else if (quoteEl) {
+      quoteEl.remove();
+    }
+
+    var navEl = document.getElementById("arcNav");
+    var emptyEl = document.getElementById("arcEmpty");
+    var countEl = document.getElementById("arcCount");
+    var headingEl = document.getElementById("arcHeadingTitle");
+
+    function cardHtml(p) {
+      var col = cats[p.category] || "#999";
+      var thumb = p.thumb
+        ? '<div class="c-thumb"><img src="' + p.thumb + '" alt="" loading="lazy" ' +
+          'onerror="this.closest(\'.c-thumb\').classList.add(\'c-thumb--fallback\')">' +
+          '<div class="c-thumb-fallback" style="--tc:' + col + '"><span>' + p.category + "</span></div></div>"
+        : '<div class="c-thumb c-thumb--fallback"><div class="c-thumb-fallback" style="--tc:' + col + '"><span>' + p.category + "</span></div></div>";
+      var tags = (p.tags || []).slice(0, 4).map(function (t) {
+        return '<span class="tagchip">' + t + "</span>";
+      }).join("");
+      return '<a href="' + p.slug + '.html" class="card reveal in" data-cat="' + p.category + '">' + thumb +
+        '<div class="card-body"><span class="catline mono"><span class="dot" style="background:' + col + '"></span>' + p.category + "</span>" +
+        "<h3>" + p.title + "</h3><p>" + p.excerpt + "</p>" +
+        '<div class="tags">' + tags + "</div>" +
+        '<div class="foot mono"><span>' + p.date + " · " + p.minutes + " min</span></div></div></a>";
+    }
+
+    function renderNav() {
+      var html = '<button class="arc-navbtn' + (state.cat === "All" ? " active" : "") + '" data-cat="All">' +
+        '<span class="lbl">All</span><span class="n">' + posts.length + "</span></button>";
+      catNames.forEach(function (c) {
+        var n = posts.filter(function (p) { return p.category === c; }).length;
+        html += '<button class="arc-navbtn' + (state.cat === c ? " active" : "") + '" data-cat="' + c + '">' +
+          '<span class="lbl"><span class="dot" style="background:' + cats[c] + '"></span>' + c + '</span>' +
+          '<span class="n">' + n + "</span></button>";
+      });
+      navEl.innerHTML = html;
+      navEl.querySelectorAll(".arc-navbtn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          state.cat = btn.dataset.cat;
+          history.replaceState(null, "", state.cat === "All" ? "#" : "#" + state.cat);
+          render();
+        });
+      });
+    }
+
+    function render() {
+      renderNav();
+      var q = state.q.trim().toLowerCase();
+      var list = posts.filter(function (p) {
+        if (state.cat !== "All" && p.category !== state.cat) return false;
+        if (!q) return true;
+        var hay = (p.title + " " + p.excerpt + " " + (p.tags || []).join(" ")).toLowerCase();
+        return hay.indexOf(q) !== -1;
+      });
+      if (state.sort === "new") list.sort(function (a, b) { return b.iso.localeCompare(a.iso); });
+      if (state.sort === "old") list.sort(function (a, b) { return a.iso.localeCompare(b.iso); });
+      if (state.sort === "quick") list.sort(function (a, b) { return a.minutes - b.minutes; });
+
+      headingEl.textContent = state.cat === "All" ? "All articles" : state.cat;
+      countEl.textContent = list.length + (list.length === 1 ? " article" : " articles");
+      if (list.length) {
+        gridEl.hidden = false; emptyEl.hidden = true;
+        gridEl.innerHTML = list.map(cardHtml).join("");
+      } else {
+        gridEl.hidden = true; emptyEl.hidden = false;
+      }
+    }
+
+    var searchEl = document.getElementById("arcSearch");
+    if (searchEl) searchEl.addEventListener("input", function (e) { state.q = e.target.value; render(); });
+    var sortEl = document.getElementById("arcSort");
+    if (sortEl) sortEl.addEventListener("change", function (e) { state.sort = e.target.value; render(); });
+
+    render();
   };
 })();
 

@@ -1,7 +1,8 @@
 ---
-title: "Toastmasters Prepared Speech: The Story Of…"
+title: "The Story Of…"
 slug: toastmasters-the-story-of
 category: Speaking
+tags: Public Speaking, Resilience, Loss
 excerpt: A speech about a friend who lost both parents to cancer before he'd even finished school — and what he taught me about staying calm inside chaos.
 date: 2023-09-22
 ---

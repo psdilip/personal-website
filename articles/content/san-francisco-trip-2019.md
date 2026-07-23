@@ -1,7 +1,8 @@
 ---
-title: "City by the Bay: Exploring the Iconic Charms of San Francisco"
+title: "City by the Bay: San Francisco"
 slug: san-francisco-trip-2019
 category: Travel
+tags: San Francisco, Yosemite, Golden Gate Bridge
 excerpt: Four days in San Francisco and a detour to Yosemite — Lombard Street, the Golden Gate from four different angles, and a lot of walking.
 date: 2020-04-19
 ---

@@ -1,7 +1,8 @@
 ---
-title: Installing Nginx using AWS EC2 user data
+title: Installing Nginx via EC2 User Data
 slug: installing-nginx-ec2-user-data
-category: How-To
+category: AWS
+tags: AWS, EC2, Nginx, User Data
 excerpt: Stand up an Nginx web server on a fresh EC2 instance with nothing but a user-data script — no manual SSH setup required.
 date: 2022-01-02
 ---

@@ -1,10 +1,10 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>All articles — PassionWavesMedia</title>
-<meta name="description" content="Browse the full archive, organized by category.">
+<meta name="description" content="Browse the full archive by category, tag, or search.">
 <link rel="canonical" href="https://example.com/articles.html">
 <meta property="og:title" content="All articles — PassionWavesMedia">
-<meta property="og:description" content="Browse the full archive, organized by category.">
+<meta property="og:description" content="Browse the full archive by category, tag, or search.">
 <meta property="og:image" content="https://example.com/og-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "All articles \u2014 PassionWavesMedia", "url": "https://example.com/articles.html"}</script>
@@ -87,13 +87,26 @@ a{ color:inherit; text-decoration:none; }
 .readmore::after{ content:" \2192"; }
 
 .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-.card{ background:var(--surface); border:1px solid var(--hairline); border-radius:16px; padding:26px 24px; display:flex; flex-direction:column; min-height:216px; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.card{ background:var(--surface); border:1px solid var(--hairline); border-radius:16px; padding:0; display:flex; flex-direction:column; overflow:hidden; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
 .card:hover{ transform:translateY(-3px); box-shadow:0 14px 36px rgba(29,26,34,0.08); border-color:#ded9d2; }
-.card h3{ font-family:var(--serif); font-weight:500; font-size:22px; line-height:1.22; letter-spacing:-0.01em; margin:12px 0 10px; }
-.card p{ color:var(--muted); font-size:15px; margin:0; flex:1; }
-.card .foot{ margin-top:18px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.card-body{ padding:18px 20px 20px; display:flex; flex-direction:column; flex:1; }
+.card h3{ font-family:var(--serif); font-weight:500; font-size:20px; line-height:1.26; letter-spacing:-0.01em; margin:10px 0 8px; }
+.card p{ color:var(--muted); font-size:14.5px; margin:0; flex:1; }
+.card .foot{ margin-top:16px; display:flex; align-items:center; justify-content:space-between; gap:10px; }
 .card .stat{ display:inline-flex; align-items:center; gap:6px; }
 .card .stat svg{ width:14px; height:14px; opacity:0.7; }
+
+/* ---------- thumbnails + tags (cards, archive) ---------- */
+.c-thumb{ position:relative; width:100%; aspect-ratio:16/10; background:var(--hairline); overflow:hidden; flex:0 0 auto; }
+.c-thumb img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease; }
+.card:hover .c-thumb img{ transform:scale(1.04); }
+.c-thumb-fallback{ display:none; position:absolute; inset:0; align-items:center; justify-content:center; text-align:center;
+  background:linear-gradient(155deg, color-mix(in srgb, var(--tc,#999) 22%, var(--surface)), color-mix(in srgb, var(--tc,#999) 6%, var(--surface))); }
+.c-thumb-fallback span{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:color-mix(in srgb, var(--tc,#999) 75%, var(--ink)); padding:0 18px; }
+.c-thumb--fallback .c-thumb-fallback{ display:flex; }
+.c-thumb--fallback img{ display:none; }
+.tags{ display:flex; flex-wrap:wrap; gap:6px; margin:2px 0 0; }
+.tagchip{ font-family:var(--mono); font-size:10.5px; letter-spacing:.04em; color:var(--muted); background:var(--bg); border:1px solid var(--hairline); border-radius:999px; padding:3px 9px; white-space:nowrap; }
 
 /* ---------- Mission ---------- */
 .mission{ border-top:1px solid var(--hairline); }
@@ -215,39 +228,61 @@ a{ color:inherit; text-decoration:none; }
 .nav a.navlink::after{ content:""; position:absolute; left:0; right:0; bottom:-5px; height:2px; border-radius:2px; background:var(--grad); background-size:200% 100%; transform:scaleX(0); transform-origin:left; transition:transform .28s ease; }
 .nav a.navlink:hover::after{ transform:scaleX(1); animation:sheen 6s ease-in-out infinite alternate; }
 
-/* ---------- archive / all-articles page ---------- */
-.cat-group{ margin-bottom:52px; }
-.cat-head{ display:flex; align-items:center; gap:11px; font-family:var(--serif); font-weight:500; font-size:24px; letter-spacing:-0.01em; margin:0 0 20px; scroll-margin-top:90px; }
-.cat-head .dot{ width:11px; height:11px; border-radius:50%; }
-.cat-count{ font-family:var(--mono); font-size:12px; letter-spacing:0.08em; color:var(--muted); font-weight:400; }
-.card.extra{ display:none; }
-.show-more{ margin-top:22px; font-family:var(--sans); font-size:14.5px; font-weight:500; color:var(--ink); background:transparent; border:1px solid var(--hairline); border-radius:999px; padding:10px 20px; cursor:pointer; transition:border-color .18s ease; }
-.show-more:hover{ border-color:var(--ink); }
+/* ---------- archive / all-articles page (sidebar navigator) ---------- */
+.arc-section{ padding-top:44px; }
+.arc-layout{ display:grid; grid-template-columns:248px 1fr; gap:44px; align-items:start; }
+.arc-side{ position:sticky; top:86px; display:flex; flex-direction:column; gap:18px; }
+.arc-quote{ font-family:var(--serif); font-style:italic; font-size:15.5px; line-height:1.5; color:var(--ink); min-height:72px;
+  padding:16px 18px; border-radius:14px; background:var(--surface); border:1px solid var(--hairline); transition:opacity .3s ease; }
+.arc-search{ width:100%; font-family:var(--sans); font-size:14.5px; padding:11px 14px; border-radius:11px; border:1px solid var(--hairline); background:var(--surface); color:var(--ink); }
+.arc-search::placeholder{ color:#a39da8; }
+.arc-search:focus{ outline:2px solid var(--accent); outline-offset:1px; }
+.arc-nav{ display:flex; flex-direction:column; gap:2px; }
+.arc-navbtn{ display:flex; align-items:center; justify-content:space-between; gap:8px; width:100%; font-family:var(--sans); font-size:14px; font-weight:500;
+  color:var(--muted); background:transparent; border:none; text-align:left; padding:9px 10px; border-radius:9px; cursor:pointer; transition:background .15s ease, color .15s ease; }
+.arc-navbtn:hover{ background:rgba(29,26,34,.05); color:var(--ink); }
+.arc-navbtn.active{ background:var(--ink); color:#fff; }
+.arc-navbtn .lbl{ display:flex; align-items:center; gap:8px; }
+.arc-navbtn .dot{ width:7px; height:7px; border-radius:50%; flex:0 0 auto; }
+.arc-navbtn .n{ font-family:var(--mono); font-size:10.5px; opacity:.65; }
+.arc-sortwrap{ display:flex; flex-direction:column; gap:6px; }
+.arc-sortwrap label{ font-size:10.5px; }
+.arc-sort{ font-family:var(--sans); font-size:13.5px; padding:9px 10px; border-radius:9px; border:1px solid var(--hairline); background:var(--surface); color:var(--ink); }
+.arc-heading{ display:flex; align-items:baseline; justify-content:space-between; gap:14px; margin-bottom:18px; }
+.arc-heading h2{ font-family:var(--serif); font-weight:500; font-size:24px; margin:0; letter-spacing:-.01em; }
+.arc-heading span{ font-family:var(--mono); font-size:11.5px; color:var(--muted); }
+.arc-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+.arc-empty{ color:var(--muted); padding:60px 0; text-align:center; font-size:15px; }
+@media (max-width:980px){ .arc-layout{ grid-template-columns:1fr; } .arc-side{ position:static; } .arc-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:620px){ .arc-grid{ grid-template-columns:1fr; } }
 .more-cta{ display:flex; justify-content:center; margin-top:40px; }
 .nav a.navlink.active{ color:var(--ink); }
 </style></head><body><header class="masthead"><div class="wrap masthead-inner"><a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 16" fill="none"><path d="M2 10 q3 -6 6 0 t6 0 t6 0" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></span><span class="brand-text">PassionWavesMedia</span></a><nav class="nav"><a class="navlink active" href="articles.html">Read</a><a class="navlink" href="index.html#mission">About</a><a href="index.html#subscribe"><button class="btn btn-grad" style="padding:9px 18px;font-size:14.5px">Subscribe</button></a></nav></div></header>
-<section class="section" style="padding-top:56px"><div class="wrap">
-  <div class="section-head reveal"><h2>All articles</h2><p>35 pieces, organized by passion.</p></div>
-  <div class="filters reveal" role="group" aria-label="Filter by category"><button class="chip" aria-pressed="true" onclick="pwArchiveFilter(this,'all')">All</button><button class="chip" aria-pressed="false" onclick="pwArchiveFilter(this,'AWS')"><span class="dot" style="background:#6B4EE6"></span>AWS</button><button class="chip" aria-pressed="false" onclick="pwArchiveFilter(this,'Travel')"><span class="dot" style="background:#22B0C4"></span>Travel</button><button class="chip" aria-pressed="false" onclick="pwArchiveFilter(this,'How-To')"><span class="dot" style="background:#FF6B4A"></span>How-To</button><button class="chip" aria-pressed="false" onclick="pwArchiveFilter(this,'Food')"><span class="dot" style="background:#E5468A"></span>Food</button><button class="chip" aria-pressed="false" onclick="pwArchiveFilter(this,'Life')"><span class="dot" style="background:#F2A93B"></span>Life</button><button class="chip" aria-pressed="false" onclick="pwArchiveFilter(this,'Speaking')"><span class="dot" style="background:#3BB273"></span>Speaking</button></div>
-  <div class="cat-group reveal" data-cat="AWS" id="AWS">
-  <h3 class="cat-head"><span class="dot" style="background:#6B4EE6"></span>AWS<span class="cat-count">4</span></h3>
-  <div class="grid"><a href="aws-click.html" class="card reveal" style="--i:0" data-cat="AWS"><span class="catline mono"><span class="dot" style="background:#6B4EE6"></span>AWS</span><h3>The AWS idea that finally made the cloud click for me</h3><p>Forget the jargon. Here's the one mental model that turned a wall of services into something I could actually reason about.</p><div class="foot mono"><span>Jul 2026 · 1 min</span></div></a><a href="starting-out-on-your-aws-journey.html" class="card reveal" style="--i:1" data-cat="AWS"><span class="catline mono"><span class="dot" style="background:#6B4EE6"></span>AWS</span><h3>Starting out on your AWS journey? Here is what I learned</h3><p>Lessons from a few years in the cloud — on learning deliberately, troubleshooting with intent, and treating a career as a process instead of a checklist.</p><div class="foot mono"><span>Nov 2021 · 5 min</span></div></a><a href="hashicorp-vault-certification-2021.html" class="card reveal" style="--i:2" data-cat="AWS"><span class="catline mono"><span class="dot" style="background:#6B4EE6"></span>AWS</span><h3>HashiCorp Vault Certification 2021 — resources to help you learn</h3><p>What Vault actually solves, how I studied for the Vault Associate exam, and the resources that were worth the time.</p><div class="foot mono"><span>Jan 2021 · 3 min</span></div></a><a href="aws-solutions-architect-associate-2019.html" class="card reveal" style="--i:3" data-cat="AWS"><span class="catline mono"><span class="dot" style="background:#6B4EE6"></span>AWS</span><h3>How I passed the AWS Solutions Architect — Associate, June 2019</h3><p>A score, a stack of resources, and the study order I'd actually repeat — after two years of AWS and two certifications already behind me.</p><div class="foot mono"><span>Jun 2019 · 3 min</span></div></a></div></div><div class="cat-group reveal" data-cat="Travel" id="Travel">
-  <h3 class="cat-head"><span class="dot" style="background:#22B0C4"></span>Travel<span class="cat-count">7</span></h3>
-  <div class="grid"><a href="slow-train.html" class="card reveal" style="--i:0" data-cat="Travel"><span class="catline mono"><span class="dot" style="background:#22B0C4"></span>Travel</span><h3>The slow train through the Scottish Highlands</h3><p>Three days, no itinerary, and what happened when I stopped optimizing the trip and started noticing it.</p><div class="foot mono"><span>Jun 2026 · 1 min</span></div></a><a href="western-wonders-road-trip-idaho-oregon-utah.html" class="card reveal" style="--i:1" data-cat="Travel"><span class="catline mono"><span class="dot" style="background:#22B0C4"></span>Travel</span><h3>The Western Wonders Road Trip: Idaho to Oregon & Utah</h3><p>A seven-day drive through Idaho, Oregon, and Utah — waterfalls, a mountain tramway, kayaking, hikes, and everything eaten along the way.</p><div class="foot mono"><span>Oct 2023 · 3 min</span></div></a><a href="navigating-new-york-work-week.html" class="card reveal" style="--i:2" data-cat="Travel"><span class="catline mono"><span class="dot" style="background:#22B0C4"></span>Travel</span><h3>"Navigating New York: My Work Week Itinerary"</h3><p>A work trip to New York that still found room for hot yoga, ice skating at Rockefeller Center, and a lot of very good food.</p><div class="foot mono"><span>Aug 2023 · 2 min</span></div></a><a href="atlanta-to-tennessee-wedding-trip.html" class="card reveal" style="--i:3" data-cat="Travel"><span class="catline mono"><span class="dot" style="background:#22B0C4"></span>Travel</span><h3>"From Peach State to Mountain Bliss: A Wedding Adventure from Atlanta to Tennessee"</h3><p>A friend's wedding in the Smokies, bookended by an overnight drive in each direction and more Taco Bell than planned.</p><div class="foot mono"><span>Jul 2023 · 2 min</span></div></a><a href="colorado-trip-aug-2022.html" class="card reveal" style="--i:4" data-cat="Travel"><span class="catline mono"><span class="dot" style="background:#22B0C4"></span>Travel</span><h3>"Epic Adventures in Colorado's Playground"</h3><p>Four days in Colorado — Rocky Mountain National Park, the summit of Mount Evans, and Red Rocks on the way out.</p><div class="foot mono"><span>Mar 2023 · 1 min</span></div></a><a href="atlanta-trip-feb-2020.html" class="card reveal" style="--i:5" data-cat="Travel"><span class="catline mono"><span class="dot" style="background:#22B0C4"></span>Travel</span><h3>"Exploring the Best of Atlanta's Cityscape"</h3><p>Two days covering Atlanta on foot — the King Center, Centennial Olympic Park, and a lot of the BeltLine.</p><div class="foot mono"><span>Apr 2020 · 2 min</span></div></a><a href="san-francisco-trip-2019.html" class="card reveal" style="--i:6" data-cat="Travel"><span class="catline mono"><span class="dot" style="background:#22B0C4"></span>Travel</span><h3>"City by the Bay: Exploring the Iconic Charms of San Francisco"</h3><p>Four days in San Francisco and a detour to Yosemite — Lombard Street, the Golden Gate from four different angles, and a lot of walking.</p><div class="foot mono"><span>Apr 2020 · 3 min</span></div></a></div></div><div class="cat-group reveal" data-cat="How-To" id="How-To">
-  <h3 class="cat-head"><span class="dot" style="background:#FF6B4A"></span>How-To<span class="cat-count">12</span></h3>
-  <div class="grid"><a href="s3-website.html" class="card reveal" style="--i:0" data-cat="How-To"><span class="catline mono"><span class="dot" style="background:#FF6B4A"></span>How-To</span><h3>Your first website on S3, explained like a human</h3><p>A calm, copy-paste-able walkthrough to get a real site live on AWS in an afternoon — no prior cloud experience needed.</p><div class="foot mono"><span>Jul 2026 · 1 min</span></div></a><a href="s3-presigned-urls-cli.html" class="card reveal" style="--i:1" data-cat="How-To"><span class="catline mono"><span class="dot" style="background:#FF6B4A"></span>How-To</span><h3>How to create presigned URLs for objects in a private AWS S3 bucket using the AWS CLI</h3><p>A walkthrough for sharing a single private S3 object temporarily — no public bucket required.</p><div class="foot mono"><span>May 2022 · 3 min</span></div></a><a href="s3-networking-error-fix.html" class="card reveal" style="--i:2" data-cat="How-To"><span class="catline mono"><span class="dot" style="background:#FF6B4A"></span>How-To</span><h3>S3 networking error / internet connection — a simple solution</h3><p>A quick fix for the confusing "networking error" or "access denied" message in the S3 console when your permissions are actually fine.</p><div class="foot mono"><span>Apr 2022 · 1 min</span></div></a><a href="download-chrome-ie-windows-server-2019.html" class="card reveal" style="--i:3" data-cat="How-To"><span class="catline mono"><span class="dot" style="background:#FF6B4A"></span>How-To</span><h3>Download Chrome using Internet Explorer on Windows Server 2019</h3><p>A fresh Windows Server 2019 box only comes with Internet Explorer — here's how to get Chrome onto it without a fight.</p><div class="foot mono"><span>Feb 2022 · 1 min</span></div></a><a href="imdsv1-to-imdsv2-upgrade.html" class="card reveal" style="--i:4" data-cat="How-To"><span class="catline mono"><span class="dot" style="background:#FF6B4A"></span>How-To</span><h3>Upgrading from AWS EC2 IMDSv1 to IMDSv2</h3><p>Why the original instance metadata service was a security gap, and the exact commands to move every instance to the authenticated version.</p><div class="foot mono"><span>Feb 2022 · 2 min</span></div></a><a href="jenkins-agents-ec2-spot-instances.html" class="card reveal" style="--i:5" data-cat="How-To"><span class="catline mono"><span class="dot" style="background:#FF6B4A"></span>How-To</span><h3>Deploy Jenkins agents using EC2 Spot instances</h3><p>A proof of concept for scaling Jenkins agents on spot pricing with the EC2-Fleet plugin — cheaper builds, no idle capacity.</p><div class="foot mono"><span>Jan 2022 · 4 min</span></div></a><a href="installing-nginx-ec2-user-data.html" class="card reveal" style="--i:6" data-cat="How-To"><span class="catline mono"><span class="dot" style="background:#FF6B4A"></span>How-To</span><h3>Installing Nginx using AWS EC2 user data</h3><p>Stand up an Nginx web server on a fresh EC2 instance with nothing but a user-data script — no manual SSH setup required.</p><div class="foot mono"><span>Jan 2022 · 2 min</span></div></a><a href="session-manager-windows-no-rdp-port.html" class="card reveal" style="--i:7" data-cat="How-To"><span class="catline mono"><span class="dot" style="background:#FF6B4A"></span>How-To</span><h3>Using AWS Session Manager to connect to a Windows instance without an RDP port open</h3><p>Get shell and RDP access to a Windows EC2 instance through Systems Manager, then close port 3389 in the security group for good.</p><div class="foot mono"><span>Jan 2022 · 2 min</span></div></a><a href="personal-website-on-aws-part-1.html" class="card reveal" style="--i:8" data-cat="How-To"><span class="catline mono"><span class="dot" style="background:#FF6B4A"></span>How-To</span><h3>"Part 1: Create your own personal website on AWS"</h3><p>Skip Wix and Squarespace — host a real static site on S3 and actually understand what's happening under the hood.</p><div class="foot mono"><span>May 2021 · 2 min</span></div></a><a href="personal-website-on-aws-part-2.html" class="card reveal" style="--i:9" data-cat="How-To"><span class="catline mono"><span class="dot" style="background:#FF6B4A"></span>How-To</span><h3>"Part 2: Add a CloudFront distribution, buy a domain, and request an SSL certificate"</h3><p>Turn the bare S3 site from Part 1 into a real HTTPS site on your own domain, served fast from CloudFront's edge network.</p><div class="foot mono"><span>May 2021 · 3 min</span></div></a><a href="create-aws-account-from-scratch.html" class="card reveal" style="--i:10" data-cat="How-To"><span class="catline mono"><span class="dot" style="background:#FF6B4A"></span>How-To</span><h3>Create an AWS account from scratch</h3><p>What cloud computing actually buys you, and the exact steps to get a working AWS account and console access.</p><div class="foot mono"><span>May 2021 · 2 min</span></div></a><a href="ubuntu-dev-environment-setup.html" class="card reveal" style="--i:11" data-cat="How-To"><span class="catline mono"><span class="dot" style="background:#FF6B4A"></span>How-To</span><h3>How to install VS Code, Terraform, Python, Boto3, GitHub, and Serverless Framework on Ubuntu</h3><p>A copy-paste setup guide for a full cloud dev environment on Ubuntu — editor, IaC, Python, AWS SDK, git, and the Serverless Framework.</p><div class="foot mono"><span>Dec 2018 · 2 min</span></div></a></div></div><div class="cat-group reveal" data-cat="Food" id="Food">
-  <h3 class="cat-head"><span class="dot" style="background:#E5468A"></span>Food<span class="cat-count">3</span></h3>
-  <div class="grid"><a href="filter-coffee.html" class="card reveal" style="--i:0" data-cat="Food"><span class="catline mono"><span class="dot" style="background:#E5468A"></span>Food</span><h3>Filter coffee, the way my grandmother made it</h3><p>A small ritual, a stainless steel tumbler, and the closest thing I have to a morning that feels like home.</p><div class="foot mono"><span>Jun 2026 · 1 min</span></div></a><a href="vegan-eastvale-guide.html" class="card reveal" style="--i:1" data-cat="Food"><span class="catline mono"><span class="dot" style="background:#E5468A"></span>Food</span><h3>"Feast Without Meat: Eastvale's Vegan Options"</h3><p>Eight Eastvale spots with real vegan orders worth making the trip for, from ramen to a beyond-sausage sandwich.</p><div class="foot mono"><span>Aug 2023 · 1 min</span></div></a><a href="vegan-inland-empire-guide.html" class="card reveal" style="--i:2" data-cat="Food"><span class="catline mono"><span class="dot" style="background:#E5468A"></span>Food</span><h3>"Vegan Culinary Scene in the SoCal Inland Empire"</h3><p>A cuisine-by-cuisine tour of the Inland Empire's best vegan orders — ramen, falafel, dumplings, and plant-based burgers.</p><div class="foot mono"><span>May 2023 · 1 min</span></div></a></div></div><div class="cat-group reveal" data-cat="Life" id="Life">
-  <h3 class="cat-head"><span class="dot" style="background:#F2A93B"></span>Life<span class="cat-count">1</span></h3>
-  <div class="grid"><a href="career-pivot.html" class="card reveal" style="--i:0" data-cat="Life"><span class="catline mono"><span class="dot" style="background:#F2A93B"></span>Life</span><h3>What a career pivot taught me about starting over</h3><p>On the quiet terror of the blank page — and why beginning again is a skill you can actually get good at.</p><div class="foot mono"><span>May 2026 · 1 min</span></div></a></div></div><div class="cat-group reveal" data-cat="Speaking" id="Speaking">
-  <h3 class="cat-head"><span class="dot" style="background:#3BB273"></span>Speaking<span class="cat-count">8</span></h3>
-  <div class="grid"><a href="toastmasters-the-story-of.html" class="card reveal" style="--i:0" data-cat="Speaking"><span class="catline mono"><span class="dot" style="background:#3BB273"></span>Speaking</span><h3>"Toastmasters Prepared Speech: The Story Of…"</h3><p>A speech about a friend who lost both parents to cancer before he'd even finished school — and what he taught me about staying calm inside chaos.</p><div class="foot mono"><span>Sep 2023 · 2 min</span></div></a><a href="toastmasters-common-feedback-mistakes.html" class="card reveal" style="--i:1" data-cat="Speaking"><span class="catline mono"><span class="dot" style="background:#3BB273"></span>Speaking</span><h3>3 common mistakes to avoid in Toastmasters speeches</h3><p>The two pieces of feedback that come up again and again — from 15 of my own speeches and watching 50 more.</p><div class="foot mono"><span>Jul 2023 · 1 min</span></div></a><a href="toastmasters-icebreaker-speech.html" class="card reveal" style="--i:2" data-cat="Speaking"><span class="catline mono"><span class="dot" style="background:#3BB273"></span>Speaking</span><h3>"Toastmasters: My Icebreaker Speech"</h3><p>The first speech every Toastmaster gives — an introduction, a name that's been mispronounced in every possible way, and where I am right now.</p><div class="foot mono"><span>Mar 2023 · 1 min</span></div></a><a href="toastmasters-letter-to-my-friend.html" class="card reveal" style="--i:3" data-cat="Speaking"><span class="catline mono"><span class="dot" style="background:#3BB273"></span>Speaking</span><h3>"Toastmasters Prepared Speech: A Letter to My Friend"</h3><p>A speech written as a letter to an old friend — one who falls constantly and never gets hurt.</p><div class="foot mono"><span>Mar 2023 · 2 min</span></div></a><a href="toastmasters-rocky-rap.html" class="card reveal" style="--i:4" data-cat="Speaking"><span class="catline mono"><span class="dot" style="background:#3BB273"></span>Speaking</span><h3>"Toastmasters Prepared Speech: Rocky (Rap Song)"</h3><p>What my dog Rocky has taught me about awareness, presence, and taking a break — delivered as a rap, because a blog post dared me to.</p><div class="foot mono"><span>Mar 2023 · 1 min</span></div></a><a href="toastmasters-self-driving-cars.html" class="card reveal" style="--i:5" data-cat="Speaking"><span class="catline mono"><span class="dot" style="background:#3BB273"></span>Speaking</span><h3>"Toastmasters Prepared Speech: Self-Driving Cars"</h3><p>A prepared speech on why autonomous vehicles still make the same kinds of mistakes they were built to eliminate.</p><div class="foot mono"><span>Mar 2023 · 2 min</span></div></a><a href="toastmasters-time.html" class="card reveal" style="--i:6" data-cat="Speaking"><span class="catline mono"><span class="dot" style="background:#3BB273"></span>Speaking</span><h3>"Toastmasters Prepared Speech: Time"</h3><p>A prepared speech on the one resource everyone has an opinion about and almost no one actually understands.</p><div class="foot mono"><span>Mar 2023 · 1 min</span></div></a><a href="toastmasters-valentine.html" class="card reveal" style="--i:7" data-cat="Speaking"><span class="catline mono"><span class="dot" style="background:#3BB273"></span>Speaking</span><h3>"Toastmasters Prepared Speech: Valentine"</h3><p>What a relationship that didn't last still managed to teach me about self-care, solitude, and not losing track of everything else.</p><div class="foot mono"><span>Mar 2023 · 1 min</span></div></a></div></div>
+<section class="section arc-section"><div class="wrap">
+  <div class="section-head reveal"><h2>All articles</h2><p>31 pieces — search by title, tag, or place, or browse by category.</p></div>
+  <div class="arc-layout reveal"><aside class="arc-side">
+  <div class="arc-quote" id="arcQuote" aria-live="polite"></div>
+  <input type="search" id="arcSearch" class="arc-search" placeholder="Search titles, tags, places…">
+  <nav class="arc-nav" id="arcNav" aria-label="Filter by category"></nav>
+  <div class="arc-sortwrap">
+    <label class="mono" for="arcSort">Sort</label>
+    <select id="arcSort" class="arc-sort">
+      <option value="new">Newest first</option>
+      <option value="old">Oldest first</option>
+      <option value="quick">Quickest read</option>
+    </select>
+  </div>
+</aside><div class="arc-main">
+  <div class="arc-heading"><h2 id="arcHeadingTitle">All articles</h2><span class="mono" id="arcCount"></span></div>
+  <div class="arc-grid" id="arcGrid"></div>
+  <p class="arc-empty" id="arcEmpty" hidden>No articles match that search.</p>
+</div></div>
 </div></section>
 <footer class="footer"><div class="wrap">
   <div class="footer-top">
     <div><a href="index.html" class="brand brand--sm"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 16" fill="none"><path d="M2 10 q3 -6 6 0 t6 0 t6 0" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></span><span class="brand-text">PassionWavesMedia</span></a><p class="colophon">Spreading passions from me to the world — one article, one wave, at a time.</p></div>
     <nav>
-      <div class="col"><h4>Read</h4><a href="articles.html">All articles</a><a href="articles.html#AWS">AWS</a><a href="articles.html#Travel">Travel</a><a href="articles.html#How-To">How-To</a><a href="articles.html#Food">Food</a><a href="articles.html#Life">Life</a><a href="articles.html#Speaking">Speaking</a></div>
+      <div class="col"><h4>Read</h4><a href="articles.html">All articles</a><a href="articles.html#AWS">AWS</a><a href="articles.html#Travel">Travel</a><a href="articles.html#How-To">How-To</a><a href="articles.html#Food">Food</a><a href="articles.html#Speaking">Speaking</a></div>
       <div class="col"><h4>More</h4><a href="index.html#mission">About</a><a href="index.html#subscribe">Subscribe</a></div>
       <div class="col"><h4>Elsewhere</h4><a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 0h4.78v2.19h.07c.67-1.27 2.3-2.61 4.73-2.61 5.06 0 6 3.33 6 7.66V24h-5v-6.99c0-1.67-.03-3.82-2.33-3.82-2.33 0-2.69 1.82-2.69 3.7V24h-5V8z"/></svg>LinkedIn</a><a href="https://x.com/your-handle" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2H21l-6.55 7.48L22 22h-6.15l-4.82-6.3L5.5 22H2.74l7.01-8-7.4-12h6.3l4.36 5.77L18.24 2zm-1.08 18h1.7L7.02 3.9H5.2L17.16 20z"/></svg>X</a></div>
     </nav>
@@ -336,26 +371,111 @@ a{ color:inherit; text-decoration:none; }
       }
     });
   };
-  window.pwArchiveFilter = function (btn, cat) {
-    document.querySelectorAll(".filters .chip").forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
-    btn.setAttribute("aria-pressed", "true");
-    document.querySelectorAll(".cat-group").forEach(function (g) {
-      g.style.display = (cat === "all" || g.dataset.cat === cat) ? "" : "none";
-    });
-  };
-  window.pwShowMore = function (btn) {
-    var g = btn.closest(".cat-group"); if (!g) return;
-    g.querySelectorAll(".card.extra").forEach(function (c) { c.classList.remove("extra"); });
-    btn.remove();
-  };
-  window.pwArchiveInit = function () {
-    var h = decodeURIComponent((location.hash || "").replace("#", "")); if (!h) return;
-    var chip = [].slice.call(document.querySelectorAll(".filters .chip"))
-      .filter(function (x) { return x.textContent.trim().toLowerCase() === h.toLowerCase(); })[0];
-    if (chip) chip.click();
+  /* ---------- sidebar navigator (articles.html) ---------- */
+  window.pwArchiveInitV2 = function () {
+    var gridEl = document.getElementById("arcGrid");
+    if (!gridEl) return;
+    var posts = window.PW_POSTS || [];
+    var cats = window.PW_CATS || {};
+    var quotes = window.PW_QUOTES || [];
+    var catNames = Object.keys(cats);
+
+    var state = { q: "", cat: "All", sort: "new" };
+    var initHash = decodeURIComponent((location.hash || "").replace("#", ""));
+    if (initHash && catNames.indexOf(initHash) !== -1) state.cat = initHash;
+
+    /* rotating quote */
+    var quoteEl = document.getElementById("arcQuote");
+    if (quoteEl && quotes.length) {
+      var qi = 0;
+      var showQuote = function () {
+        quoteEl.style.opacity = 0;
+        setTimeout(function () {
+          quoteEl.textContent = "“" + quotes[qi % quotes.length] + "”";
+          quoteEl.style.opacity = 1;
+          qi++;
+        }, 260);
+      };
+      showQuote();
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduce && quotes.length > 1) setInterval(showQuote, 7000);
+    } else if (quoteEl) {
+      quoteEl.remove();
+    }
+
+    var navEl = document.getElementById("arcNav");
+    var emptyEl = document.getElementById("arcEmpty");
+    var countEl = document.getElementById("arcCount");
+    var headingEl = document.getElementById("arcHeadingTitle");
+
+    function cardHtml(p) {
+      var col = cats[p.category] || "#999";
+      var thumb = p.thumb
+        ? '<div class="c-thumb"><img src="' + p.thumb + '" alt="" loading="lazy" ' +
+          'onerror="this.closest(\'.c-thumb\').classList.add(\'c-thumb--fallback\')">' +
+          '<div class="c-thumb-fallback" style="--tc:' + col + '"><span>' + p.category + "</span></div></div>"
+        : '<div class="c-thumb c-thumb--fallback"><div class="c-thumb-fallback" style="--tc:' + col + '"><span>' + p.category + "</span></div></div>";
+      var tags = (p.tags || []).slice(0, 4).map(function (t) {
+        return '<span class="tagchip">' + t + "</span>";
+      }).join("");
+      return '<a href="' + p.slug + '.html" class="card reveal in" data-cat="' + p.category + '">' + thumb +
+        '<div class="card-body"><span class="catline mono"><span class="dot" style="background:' + col + '"></span>' + p.category + "</span>" +
+        "<h3>" + p.title + "</h3><p>" + p.excerpt + "</p>" +
+        '<div class="tags">' + tags + "</div>" +
+        '<div class="foot mono"><span>' + p.date + " · " + p.minutes + " min</span></div></div></a>";
+    }
+
+    function renderNav() {
+      var html = '<button class="arc-navbtn' + (state.cat === "All" ? " active" : "") + '" data-cat="All">' +
+        '<span class="lbl">All</span><span class="n">' + posts.length + "</span></button>";
+      catNames.forEach(function (c) {
+        var n = posts.filter(function (p) { return p.category === c; }).length;
+        html += '<button class="arc-navbtn' + (state.cat === c ? " active" : "") + '" data-cat="' + c + '">' +
+          '<span class="lbl"><span class="dot" style="background:' + cats[c] + '"></span>' + c + '</span>' +
+          '<span class="n">' + n + "</span></button>";
+      });
+      navEl.innerHTML = html;
+      navEl.querySelectorAll(".arc-navbtn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          state.cat = btn.dataset.cat;
+          history.replaceState(null, "", state.cat === "All" ? "#" : "#" + state.cat);
+          render();
+        });
+      });
+    }
+
+    function render() {
+      renderNav();
+      var q = state.q.trim().toLowerCase();
+      var list = posts.filter(function (p) {
+        if (state.cat !== "All" && p.category !== state.cat) return false;
+        if (!q) return true;
+        var hay = (p.title + " " + p.excerpt + " " + (p.tags || []).join(" ")).toLowerCase();
+        return hay.indexOf(q) !== -1;
+      });
+      if (state.sort === "new") list.sort(function (a, b) { return b.iso.localeCompare(a.iso); });
+      if (state.sort === "old") list.sort(function (a, b) { return a.iso.localeCompare(b.iso); });
+      if (state.sort === "quick") list.sort(function (a, b) { return a.minutes - b.minutes; });
+
+      headingEl.textContent = state.cat === "All" ? "All articles" : state.cat;
+      countEl.textContent = list.length + (list.length === 1 ? " article" : " articles");
+      if (list.length) {
+        gridEl.hidden = false; emptyEl.hidden = true;
+        gridEl.innerHTML = list.map(cardHtml).join("");
+      } else {
+        gridEl.hidden = true; emptyEl.hidden = false;
+      }
+    }
+
+    var searchEl = document.getElementById("arcSearch");
+    if (searchEl) searchEl.addEventListener("input", function (e) { state.q = e.target.value; render(); });
+    var sortEl = document.getElementById("arcSort");
+    if (sortEl) sortEl.addEventListener("change", function (e) { state.sort = e.target.value; render(); });
+
+    render();
   };
 })();
 
 window.pwSubscribe=function(f){if(!f.getAttribute('action')){alert('Newsletter is not connected yet — see the README to add your email provider.');return false;}return true;};</script>
-<script>pwArchiveInit();</script>
+<script>window.PW_POSTS=[{"slug": "s3-website", "title": "Your First Website on S3", "excerpt": "A calm, copy-paste-able walkthrough to get a real site live on AWS in an afternoon \u2014 no prior cloud experience needed.", "category": "AWS", "tags": ["AWS", "S3", "Static Hosting"], "thumb": null, "date": "Jul 2026", "iso": "2026-07-08", "minutes": 1}, {"slug": "western-wonders-road-trip-idaho-oregon-utah", "title": "Road Trip: Idaho, Oregon & Utah", "excerpt": "A seven-day drive through Idaho, Oregon, and Utah \u2014 waterfalls, a mountain tramway, kayaking, hikes, and everything eaten along the way.", "category": "Travel", "tags": ["Idaho", "Oregon", "Utah", "Road Trip", "Boise", "Salt Lake City"], "thumb": "https://miro.medium.com/v2/resize:fit:1400/0*eUWkxe3m8yQ2PDqV", "date": "Oct 2023", "iso": "2023-10-01", "minutes": 3}, {"slug": "toastmasters-the-story-of", "title": "\"The Story Of\u2026\"", "excerpt": "A speech about a friend who lost both parents to cancer before he'd even finished school \u2014 and what he taught me about staying calm inside chaos.", "category": "Speaking", "tags": ["Public Speaking", "Resilience", "Loss"], "thumb": null, "date": "Sep 2023", "iso": "2023-09-22", "minutes": 2}, {"slug": "navigating-new-york-work-week", "title": "\"A Work Week in New York\"", "excerpt": "A work trip to New York that still found room for hot yoga, ice skating at Rockefeller Center, and a lot of very good food.", "category": "Travel", "tags": ["New York", "Work Travel", "Manhattan"], "thumb": "https://miro.medium.com/v2/resize:fit:1400/0*6v2xqrG-wZZ1bb0d", "date": "Aug 2023", "iso": "2023-08-08", "minutes": 2}, {"slug": "vegan-eastvale-guide", "title": "\"Vegan Guide to Eastvale\"", "excerpt": "Eight Eastvale spots with real vegan orders worth making the trip for, from ramen to a beyond-sausage sandwich.", "category": "Food", "tags": ["Vegan", "Eastvale", "Restaurants"], "thumb": null, "date": "Aug 2023", "iso": "2023-08-08", "minutes": 1}, {"slug": "toastmasters-common-feedback-mistakes", "title": "3 Common Toastmasters Mistakes", "excerpt": "The two pieces of feedback that come up again and again \u2014 from 15 of my own speeches and watching 50 more.", "category": "Speaking", "tags": ["Public Speaking", "Feedback", "Tips"], "thumb": null, "date": "Jul 2023", "iso": "2023-07-27", "minutes": 1}, {"slug": "atlanta-to-tennessee-wedding-trip", "title": "\"A Wedding Trip: Atlanta to Tennessee\"", "excerpt": "A friend's wedding in the Smokies, bookended by an overnight drive in each direction and more Taco Bell than planned.", "category": "Travel", "tags": ["Atlanta", "Tennessee", "Smoky Mountains", "Wedding", "Road Trip"], "thumb": "assets/images/atlanta-to-tennessee-wedding-trip/01-house-mountain.jpg", "date": "Jul 2023", "iso": "2023-07-06", "minutes": 2}, {"slug": "vegan-inland-empire-guide", "title": "\"Vegan Guide to the Inland Empire\"", "excerpt": "A cuisine-by-cuisine tour of the Inland Empire's best vegan orders \u2014 ramen, falafel, dumplings, and plant-based burgers.", "category": "Food", "tags": ["Vegan", "Inland Empire", "Restaurants"], "thumb": null, "date": "May 2023", "iso": "2023-05-23", "minutes": 1}, {"slug": "colorado-trip-aug-2022", "title": "\"Colorado's Playground: Rockies to Red Rocks\"", "excerpt": "Four days in Colorado \u2014 Rocky Mountain National Park, the summit of Mount Evans, and Red Rocks on the way out.", "category": "Travel", "tags": ["Colorado", "Rocky Mountain National Park", "Mount Evans", "Red Rocks"], "thumb": "assets/images/colorado-trip-aug-2022/01-day1.jpg", "date": "Mar 2023", "iso": "2023-03-24", "minutes": 1}, {"slug": "toastmasters-icebreaker-speech", "title": "\"My Icebreaker Speech\"", "excerpt": "The first speech every Toastmaster gives \u2014 an introduction, a name that's been mispronounced in every possible way, and where I am right now.", "category": "Speaking", "tags": ["Public Speaking", "Introduction", "Icebreaker"], "thumb": null, "date": "Mar 2023", "iso": "2023-03-22", "minutes": 1}, {"slug": "toastmasters-letter-to-my-friend", "title": "\"A Letter to My Friend, Rain\"", "excerpt": "A speech written as a letter to an old friend \u2014 one who falls constantly and never gets hurt.", "category": "Speaking", "tags": ["Public Speaking", "Metaphor", "Rain"], "thumb": null, "date": "Mar 2023", "iso": "2023-03-22", "minutes": 2}, {"slug": "toastmasters-rocky-rap", "title": "\"Rocky (Rap Song)\"", "excerpt": "What my dog Rocky has taught me about awareness, presence, and taking a break \u2014 delivered as a rap, because a blog post dared me to.", "category": "Speaking", "tags": ["Public Speaking", "Dogs", "Rap", "Creativity"], "thumb": "https://miro.medium.com/v2/resize:fit:1400/0*BGo1xHYpWLVcypu9", "date": "Mar 2023", "iso": "2023-03-22", "minutes": 1}, {"slug": "toastmasters-self-driving-cars", "title": "\"Self-Driving Cars\"", "excerpt": "A prepared speech on why autonomous vehicles still make the same kinds of mistakes they were built to eliminate.", "category": "Speaking", "tags": ["Public Speaking", "Self-Driving Cars", "Technology"], "thumb": "https://miro.medium.com/v2/resize:fit:1400/0*ugMjEQ7ahqw1kkwT", "date": "Mar 2023", "iso": "2023-03-22", "minutes": 2}, {"slug": "toastmasters-time", "title": "\"On Time\"", "excerpt": "A prepared speech on the one resource everyone has an opinion about and almost no one actually understands.", "category": "Speaking", "tags": ["Public Speaking", "Time", "Philosophy"], "thumb": "https://miro.medium.com/v2/resize:fit:1400/0*Dy3pQ99mNbsIQ_Yd", "date": "Mar 2023", "iso": "2023-03-22", "minutes": 1}, {"slug": "toastmasters-valentine", "title": "\"Valentine\"", "excerpt": "What a relationship that didn't last still managed to teach me about self-care, solitude, and not losing track of everything else.", "category": "Speaking", "tags": ["Public Speaking", "Relationships", "Self-Care"], "thumb": null, "date": "Mar 2023", "iso": "2023-03-22", "minutes": 1}, {"slug": "s3-presigned-urls-cli", "title": "Presigned URLs for S3 with the CLI", "excerpt": "A walkthrough for sharing a single private S3 object temporarily \u2014 no public bucket required.", "category": "AWS", "tags": ["AWS", "S3", "CLI", "Presigned URLs"], "thumb": "https://miro.medium.com/v2/resize:fit:1400/0*yv7UhxzgMNL6QFvx", "date": "May 2022", "iso": "2022-05-18", "minutes": 3}, {"slug": "s3-networking-error-fix", "title": "Fixing an S3 Networking Error", "excerpt": "A quick fix for the confusing \"networking error\" or \"access denied\" message in the S3 console when your permissions are actually fine.", "category": "AWS", "tags": ["AWS", "S3", "Troubleshooting"], "thumb": null, "date": "Apr 2022", "iso": "2022-04-23", "minutes": 1}, {"slug": "download-chrome-ie-windows-server-2019", "title": "Getting Chrome onto Windows Server 2019", "excerpt": "A fresh Windows Server 2019 box only comes with Internet Explorer \u2014 here's how to get Chrome onto it without a fight.", "category": "How-To", "tags": ["Windows Server", "Internet Explorer", "Chrome"], "thumb": null, "date": "Feb 2022", "iso": "2022-02-17", "minutes": 1}, {"slug": "imdsv1-to-imdsv2-upgrade", "title": "Upgrading EC2 to IMDSv2", "excerpt": "Why the original instance metadata service was a security gap, and the exact commands to move every instance to the authenticated version.", "category": "AWS", "tags": ["AWS", "EC2", "IMDSv2", "Security"], "thumb": "https://miro.medium.com/v2/resize:fit:1400/0*GZbP2GiCu3cI00Yw", "date": "Feb 2022", "iso": "2022-02-16", "minutes": 2}, {"slug": "jenkins-agents-ec2-spot-instances", "title": "Jenkins Agents on EC2 Spot Instances", "excerpt": "A proof of concept for scaling Jenkins agents on spot pricing with the EC2-Fleet plugin \u2014 cheaper builds, no idle capacity.", "category": "AWS", "tags": ["AWS", "EC2", "Jenkins", "Spot Instances", "CI/CD"], "thumb": null, "date": "Jan 2022", "iso": "2022-01-06", "minutes": 4}, {"slug": "installing-nginx-ec2-user-data", "title": "Installing Nginx via EC2 User Data", "excerpt": "Stand up an Nginx web server on a fresh EC2 instance with nothing but a user-data script \u2014 no manual SSH setup required.", "category": "AWS", "tags": ["AWS", "EC2", "Nginx", "User Data"], "thumb": "https://miro.medium.com/v2/resize:fit:1400/0*qRqceqwia11U1lJP", "date": "Jan 2022", "iso": "2022-01-02", "minutes": 2}, {"slug": "session-manager-windows-no-rdp-port", "title": "Windows Access via Session Manager, No RDP Port", "excerpt": "Get shell and RDP access to a Windows EC2 instance through Systems Manager, then close port 3389 in the security group for good.", "category": "AWS", "tags": ["AWS", "EC2", "Session Manager", "Security"], "thumb": "https://miro.medium.com/v2/resize:fit:1400/0*Sl3gnlPFQn9Q-8On", "date": "Jan 2022", "iso": "2022-01-01", "minutes": 2}, {"slug": "starting-out-on-your-aws-journey", "title": "Starting Your AWS Journey", "excerpt": "Lessons from a few years in the cloud \u2014 on learning deliberately, troubleshooting with intent, and treating a career as a process instead of a checklist.", "category": "AWS", "tags": ["AWS", "Career", "Certifications", "Learning"], "thumb": "https://miro.medium.com/v2/resize:fit:1400/0*maADp_tKPAIgC8uU", "date": "Nov 2021", "iso": "2021-11-26", "minutes": 5}, {"slug": "personal-website-on-aws-part-1", "title": "\"Personal Website on AWS, Part 1: S3\"", "excerpt": "Skip Wix and Squarespace \u2014 host a real static site on S3 and actually understand what's happening under the hood.", "category": "AWS", "tags": ["AWS", "S3", "Static Hosting"], "thumb": "https://miro.medium.com/v2/resize:fit:1400/0*sy3DbaNstc2e_k8Q", "date": "May 2021", "iso": "2021-05-31", "minutes": 2}, {"slug": "personal-website-on-aws-part-2", "title": "\"Personal Website on AWS, Part 2: CloudFront & SSL\"", "excerpt": "Turn the bare S3 site from Part 1 into a real HTTPS site on your own domain, served fast from CloudFront's edge network.", "category": "AWS", "tags": ["AWS", "CloudFront", "Route 53", "SSL"], "thumb": "https://miro.medium.com/v2/resize:fit:1400/0*hcu8vevpyXv2nG0K", "date": "May 2021", "iso": "2021-05-31", "minutes": 3}, {"slug": "create-aws-account-from-scratch", "title": "Creating an AWS Account from Scratch", "excerpt": "What cloud computing actually buys you, and the exact steps to get a working AWS account and console access.", "category": "AWS", "tags": ["AWS", "Getting Started", "IAM"], "thumb": "https://miro.medium.com/v2/resize:fit:1400/0*1eRPSCZz9MMzTOLz", "date": "May 2021", "iso": "2021-05-22", "minutes": 2}, {"slug": "hashicorp-vault-certification-2021", "title": "HashiCorp Vault Certification Guide", "excerpt": "What Vault actually solves, how I studied for the Vault Associate exam, and the resources that were worth the time.", "category": "AWS", "tags": ["HashiCorp Vault", "Secrets Management", "Certification"], "thumb": null, "date": "Jan 2021", "iso": "2021-01-28", "minutes": 3}, {"slug": "atlanta-trip-feb-2020", "title": "\"Exploring Atlanta's Cityscape\"", "excerpt": "Two days covering Atlanta on foot \u2014 the King Center, Centennial Olympic Park, and a lot of the BeltLine.", "category": "Travel", "tags": ["Atlanta", "Georgia", "City Walk"], "thumb": "assets/images/atlanta-trip-feb-2020/01-jackson-bridge-view.jpg", "date": "Apr 2020", "iso": "2020-04-21", "minutes": 2}, {"slug": "san-francisco-trip-2019", "title": "\"City by the Bay: San Francisco\"", "excerpt": "Four days in San Francisco and a detour to Yosemite \u2014 Lombard Street, the Golden Gate from four different angles, and a lot of walking.", "category": "Travel", "tags": ["San Francisco", "Yosemite", "Golden Gate Bridge"], "thumb": "assets/images/san-francisco-trip-2019/01-day1.jpg", "date": "Apr 2020", "iso": "2020-04-19", "minutes": 3}, {"slug": "aws-solutions-architect-associate-2019", "title": "Passing the AWS Solutions Architect Exam", "excerpt": "A score, a stack of resources, and the study order I'd actually repeat \u2014 after two years of AWS and two certifications already behind me.", "category": "AWS", "tags": ["AWS", "Solutions Architect", "Certification", "EC2", "S3", "IAM"], "thumb": "https://miro.medium.com/v2/resize:fit:1400/0*HHN6ZsSZ_tO-SnhF", "date": "Jun 2019", "iso": "2019-06-09", "minutes": 3}, {"slug": "ubuntu-dev-environment-setup", "title": "Cloud Dev Setup on Ubuntu", "excerpt": "A copy-paste setup guide for a full cloud dev environment on Ubuntu \u2014 editor, IaC, Python, AWS SDK, git, and the Serverless Framework.", "category": "AWS", "tags": ["AWS", "Terraform", "Python", "Boto3", "GitHub", "Serverless"], "thumb": null, "date": "Dec 2018", "iso": "2018-12-02", "minutes": 2}];window.PW_CATS={"AWS": "#6B4EE6", "Travel": "#22B0C4", "How-To": "#FF6B4A", "Food": "#E5468A", "Speaking": "#3BB273"};window.PW_QUOTES=["Go slow to go fast.", "The bad news is time flies. The good news is you are the pilot.", "You are not what happened to you \u2014 you are what you choose to become.", "Struggle, failure, risk, and chaos aren't things to route around. They're the path to getting better."];pwArchiveInitV2();</script>
 </body></html>

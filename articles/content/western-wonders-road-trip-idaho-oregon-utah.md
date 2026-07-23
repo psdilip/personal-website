@@ -1,7 +1,8 @@
 ---
-title: The Western Wonders Road Trip: Idaho to Oregon & Utah
+title: Road Trip: Idaho, Oregon & Utah
 slug: western-wonders-road-trip-idaho-oregon-utah
 category: Travel
+tags: Idaho, Oregon, Utah, Road Trip, Boise, Salt Lake City
 excerpt: A seven-day drive through Idaho, Oregon, and Utah — waterfalls, a mountain tramway, kayaking, hikes, and everything eaten along the way.
 date: 2023-10-01
 ---

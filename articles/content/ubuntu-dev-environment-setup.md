@@ -1,7 +1,8 @@
 ---
-title: How to install VS Code, Terraform, Python, Boto3, GitHub, and Serverless Framework on Ubuntu
+title: Cloud Dev Setup on Ubuntu
 slug: ubuntu-dev-environment-setup
-category: How-To
+category: AWS
+tags: AWS, Terraform, Python, Boto3, GitHub, Serverless
 excerpt: A copy-paste setup guide for a full cloud dev environment on Ubuntu — editor, IaC, Python, AWS SDK, git, and the Serverless Framework.
 date: 2018-12-02
 ---

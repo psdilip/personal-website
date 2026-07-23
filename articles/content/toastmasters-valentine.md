@@ -1,7 +1,8 @@
 ---
-title: "Toastmasters Prepared Speech: Valentine"
+title: "Valentine"
 slug: toastmasters-valentine
 category: Speaking
+tags: Public Speaking, Relationships, Self-Care
 excerpt: What a relationship that didn't last still managed to teach me about self-care, solitude, and not losing track of everything else.
 date: 2023-03-22
 ---

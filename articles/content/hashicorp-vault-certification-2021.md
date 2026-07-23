@@ -1,7 +1,8 @@
 ---
-title: HashiCorp Vault Certification 2021 — resources to help you learn
+title: HashiCorp Vault Certification Guide
 slug: hashicorp-vault-certification-2021
 category: AWS
+tags: HashiCorp Vault, Secrets Management, Certification
 excerpt: What Vault actually solves, how I studied for the Vault Associate exam, and the resources that were worth the time.
 date: 2021-01-28
 ---

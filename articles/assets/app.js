@@ -80,22 +80,107 @@
       }
     });
   };
-  window.pwArchiveFilter = function (btn, cat) {
-    document.querySelectorAll(".filters .chip").forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
-    btn.setAttribute("aria-pressed", "true");
-    document.querySelectorAll(".cat-group").forEach(function (g) {
-      g.style.display = (cat === "all" || g.dataset.cat === cat) ? "" : "none";
-    });
-  };
-  window.pwShowMore = function (btn) {
-    var g = btn.closest(".cat-group"); if (!g) return;
-    g.querySelectorAll(".card.extra").forEach(function (c) { c.classList.remove("extra"); });
-    btn.remove();
-  };
-  window.pwArchiveInit = function () {
-    var h = decodeURIComponent((location.hash || "").replace("#", "")); if (!h) return;
-    var chip = [].slice.call(document.querySelectorAll(".filters .chip"))
-      .filter(function (x) { return x.textContent.trim().toLowerCase() === h.toLowerCase(); })[0];
-    if (chip) chip.click();
+  /* ---------- sidebar navigator (articles.html) ---------- */
+  window.pwArchiveInitV2 = function () {
+    var gridEl = document.getElementById("arcGrid");
+    if (!gridEl) return;
+    var posts = window.PW_POSTS || [];
+    var cats = window.PW_CATS || {};
+    var quotes = window.PW_QUOTES || [];
+    var catNames = Object.keys(cats);
+
+    var state = { q: "", cat: "All", sort: "new" };
+    var initHash = decodeURIComponent((location.hash || "").replace("#", ""));
+    if (initHash && catNames.indexOf(initHash) !== -1) state.cat = initHash;
+
+    /* rotating quote */
+    var quoteEl = document.getElementById("arcQuote");
+    if (quoteEl && quotes.length) {
+      var qi = 0;
+      var showQuote = function () {
+        quoteEl.style.opacity = 0;
+        setTimeout(function () {
+          quoteEl.textContent = "“" + quotes[qi % quotes.length] + "”";
+          quoteEl.style.opacity = 1;
+          qi++;
+        }, 260);
+      };
+      showQuote();
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduce && quotes.length > 1) setInterval(showQuote, 7000);
+    } else if (quoteEl) {
+      quoteEl.remove();
+    }
+
+    var navEl = document.getElementById("arcNav");
+    var emptyEl = document.getElementById("arcEmpty");
+    var countEl = document.getElementById("arcCount");
+    var headingEl = document.getElementById("arcHeadingTitle");
+
+    function cardHtml(p) {
+      var col = cats[p.category] || "#999";
+      var thumb = p.thumb
+        ? '<div class="c-thumb"><img src="' + p.thumb + '" alt="" loading="lazy" ' +
+          'onerror="this.closest(\'.c-thumb\').classList.add(\'c-thumb--fallback\')">' +
+          '<div class="c-thumb-fallback" style="--tc:' + col + '"><span>' + p.category + "</span></div></div>"
+        : '<div class="c-thumb c-thumb--fallback"><div class="c-thumb-fallback" style="--tc:' + col + '"><span>' + p.category + "</span></div></div>";
+      var tags = (p.tags || []).slice(0, 4).map(function (t) {
+        return '<span class="tagchip">' + t + "</span>";
+      }).join("");
+      return '<a href="' + p.slug + '.html" class="card reveal in" data-cat="' + p.category + '">' + thumb +
+        '<div class="card-body"><span class="catline mono"><span class="dot" style="background:' + col + '"></span>' + p.category + "</span>" +
+        "<h3>" + p.title + "</h3><p>" + p.excerpt + "</p>" +
+        '<div class="tags">' + tags + "</div>" +
+        '<div class="foot mono"><span>' + p.date + " · " + p.minutes + " min</span></div></div></a>";
+    }
+
+    function renderNav() {
+      var html = '<button class="arc-navbtn' + (state.cat === "All" ? " active" : "") + '" data-cat="All">' +
+        '<span class="lbl">All</span><span class="n">' + posts.length + "</span></button>";
+      catNames.forEach(function (c) {
+        var n = posts.filter(function (p) { return p.category === c; }).length;
+        html += '<button class="arc-navbtn' + (state.cat === c ? " active" : "") + '" data-cat="' + c + '">' +
+          '<span class="lbl"><span class="dot" style="background:' + cats[c] + '"></span>' + c + '</span>' +
+          '<span class="n">' + n + "</span></button>";
+      });
+      navEl.innerHTML = html;
+      navEl.querySelectorAll(".arc-navbtn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          state.cat = btn.dataset.cat;
+          history.replaceState(null, "", state.cat === "All" ? "#" : "#" + state.cat);
+          render();
+        });
+      });
+    }
+
+    function render() {
+      renderNav();
+      var q = state.q.trim().toLowerCase();
+      var list = posts.filter(function (p) {
+        if (state.cat !== "All" && p.category !== state.cat) return false;
+        if (!q) return true;
+        var hay = (p.title + " " + p.excerpt + " " + (p.tags || []).join(" ")).toLowerCase();
+        return hay.indexOf(q) !== -1;
+      });
+      if (state.sort === "new") list.sort(function (a, b) { return b.iso.localeCompare(a.iso); });
+      if (state.sort === "old") list.sort(function (a, b) { return a.iso.localeCompare(b.iso); });
+      if (state.sort === "quick") list.sort(function (a, b) { return a.minutes - b.minutes; });
+
+      headingEl.textContent = state.cat === "All" ? "All articles" : state.cat;
+      countEl.textContent = list.length + (list.length === 1 ? " article" : " articles");
+      if (list.length) {
+        gridEl.hidden = false; emptyEl.hidden = true;
+        gridEl.innerHTML = list.map(cardHtml).join("");
+      } else {
+        gridEl.hidden = true; emptyEl.hidden = false;
+      }
+    }
+
+    var searchEl = document.getElementById("arcSearch");
+    if (searchEl) searchEl.addEventListener("input", function (e) { state.q = e.target.value; render(); });
+    var sortEl = document.getElementById("arcSort");
+    if (sortEl) sortEl.addEventListener("change", function (e) { state.sort = e.target.value; render(); });
+
+    render();
   };
 })();

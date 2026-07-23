@@ -1,7 +1,8 @@
 ---
-title: "Vegan Culinary Scene in the SoCal Inland Empire"
+title: "Vegan Guide to the Inland Empire"
 slug: vegan-inland-empire-guide
 category: Food
+tags: Vegan, Inland Empire, Restaurants
 excerpt: A cuisine-by-cuisine tour of the Inland Empire's best vegan orders — ramen, falafel, dumplings, and plant-based burgers.
 date: 2023-05-23
 ---

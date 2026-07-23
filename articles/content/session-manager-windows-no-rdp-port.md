@@ -1,7 +1,8 @@
 ---
-title: Using AWS Session Manager to connect to a Windows instance without an RDP port open
+title: Windows Access via Session Manager, No RDP Port
 slug: session-manager-windows-no-rdp-port
-category: How-To
+category: AWS
+tags: AWS, EC2, Session Manager, Security
 excerpt: Get shell and RDP access to a Windows EC2 instance through Systems Manager, then close port 3389 in the security group for good.
 date: 2022-01-01
 ---

@@ -1,7 +1,8 @@
 ---
-title: "Toastmasters: My Icebreaker Speech"
+title: "My Icebreaker Speech"
 slug: toastmasters-icebreaker-speech
 category: Speaking
+tags: Public Speaking, Introduction, Icebreaker
 excerpt: The first speech every Toastmaster gives — an introduction, a name that's been mispronounced in every possible way, and where I am right now.
 date: 2023-03-22
 ---

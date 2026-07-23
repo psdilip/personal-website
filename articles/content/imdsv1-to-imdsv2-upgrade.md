@@ -1,7 +1,8 @@
 ---
-title: Upgrading from AWS EC2 IMDSv1 to IMDSv2
+title: Upgrading EC2 to IMDSv2
 slug: imdsv1-to-imdsv2-upgrade
-category: How-To
+category: AWS
+tags: AWS, EC2, IMDSv2, Security
 excerpt: Why the original instance metadata service was a security gap, and the exact commands to move every instance to the authenticated version.
 date: 2022-02-16
 ---

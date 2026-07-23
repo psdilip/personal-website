@@ -1,7 +1,8 @@
 ---
-title: How to create presigned URLs for objects in a private AWS S3 bucket using the AWS CLI
+title: Presigned URLs for S3 with the CLI
 slug: s3-presigned-urls-cli
-category: How-To
+category: AWS
+tags: AWS, S3, CLI, Presigned URLs
 excerpt: A walkthrough for sharing a single private S3 object temporarily — no public bucket required.
 date: 2022-05-18
 ---

@@ -1,7 +1,8 @@
 ---
-title: "Toastmasters Prepared Speech: Rocky (Rap Song)"
+title: "Rocky (Rap Song)"
 slug: toastmasters-rocky-rap
 category: Speaking
+tags: Public Speaking, Dogs, Rap, Creativity
 excerpt: What my dog Rocky has taught me about awareness, presence, and taking a break — delivered as a rap, because a blog post dared me to.
 date: 2023-03-22
 ---

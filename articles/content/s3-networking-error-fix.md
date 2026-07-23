@@ -1,7 +1,8 @@
 ---
-title: S3 networking error / internet connection — a simple solution
+title: Fixing an S3 Networking Error
 slug: s3-networking-error-fix
-category: How-To
+category: AWS
+tags: AWS, S3, Troubleshooting
 excerpt: A quick fix for the confusing "networking error" or "access denied" message in the S3 console when your permissions are actually fine.
 date: 2022-04-23
 ---

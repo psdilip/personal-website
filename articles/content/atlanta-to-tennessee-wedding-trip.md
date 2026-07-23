@@ -1,7 +1,8 @@
 ---
-title: "From Peach State to Mountain Bliss: A Wedding Adventure from Atlanta to Tennessee"
+title: "A Wedding Trip: Atlanta to Tennessee"
 slug: atlanta-to-tennessee-wedding-trip
 category: Travel
+tags: Atlanta, Tennessee, Smoky Mountains, Wedding, Road Trip
 excerpt: A friend's wedding in the Smokies, bookended by an overnight drive in each direction and more Taco Bell than planned.
 date: 2023-07-06
 ---

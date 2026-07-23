@@ -1,7 +1,8 @@
 ---
-title: "Toastmasters Prepared Speech: A Letter to My Friend"
+title: "A Letter to My Friend, Rain"
 slug: toastmasters-letter-to-my-friend
 category: Speaking
+tags: Public Speaking, Metaphor, Rain
 excerpt: A speech written as a letter to an old friend — one who falls constantly and never gets hurt.
 date: 2023-03-22
 ---

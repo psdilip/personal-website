@@ -134,8 +134,9 @@ def dot(color):
     return f'<span class="dot" style="background:{color}"></span>'
 
 
-def footer(cfg):
-    cats = '<a href="articles.html">All articles</a>' + "".join(f'<a href="articles.html#{c}">{c}</a>' for c in cfg["categories"])
+def footer(cfg, present_cats=None):
+    present_cats = present_cats if present_cats is not None else list(cfg["categories"].keys())
+    cats = '<a href="articles.html">All articles</a>' + "".join(f'<a href="articles.html#{c}">{c}</a>' for c in present_cats)
     soc = ""
     if cfg["social"].get("linkedin"):
         soc += f'<a href="{cfg["social"]["linkedin"]}" target="_blank" rel="noopener">{LINKEDIN}LinkedIn</a>'
@@ -154,13 +155,31 @@ def footer(cfg):
 </div></footer>'''
 
 
+def thumb_html(cfg, p):
+    col = cfg["categories"].get(p["category"], "#999")
+    fallback = f'<div class="c-thumb-fallback" style="--tc:{col}"><span>{p["category"]}</span></div>'
+    if p.get("thumb"):
+        img = (f'<img src="{p["thumb"]}" alt="" loading="lazy" '
+               f'onerror="this.closest(\'.c-thumb\').classList.add(\'c-thumb--fallback\')">')
+        return f'<div class="c-thumb">{img}{fallback}</div>'
+    return f'<div class="c-thumb c-thumb--fallback">{fallback}</div>'
+
+
+def tag_chips_html(tags, limit=4):
+    return "".join(f'<span class="tagchip">{html.escape(t)}</span>' for t in tags[:limit])
+
+
 def card_html(cfg, p, idx=0, extra=False):
     col = cfg["categories"].get(p["category"], "#999")
     cls = "card reveal in extra" if extra else "card reveal"
     return (f'<a href="{p["slug"]}.html" class="{cls}" style="--i:{idx}" data-cat="{p["category"]}">'
+            f'{thumb_html(cfg, p)}'
+            f'<div class="card-body">'
             f'<span class="catline mono">{dot(col)}{p["category"]}</span>'
             f'<h3>{p["title"]}</h3><p>{p["excerpt"]}</p>'
-            f'<div class="foot mono"><span>{p["card_date"]} · {p["minutes"]} min</span></div></a>')
+            f'<div class="tags">{tag_chips_html(p["tags"])}</div>'
+            f'<div class="foot mono"><span>{p["card_date"]} · {p["minutes"]} min</span></div>'
+            f'</div></a>')
 
 
 def nav(cfg, home=False, active=""):
@@ -220,7 +239,7 @@ def page_tail(cfg, init_js=""):
 # ----------------------------------------------------------------------
 # Pages
 # ----------------------------------------------------------------------
-def build_index(cfg, posts):
+def build_index(cfg, posts, present_cats):
     featured = next((p for p in posts if p.get("featured")), posts[0] if posts else None)
     feat_html = ""
     if featured:
@@ -257,7 +276,7 @@ def build_index(cfg, posts):
 
 {mission_html}
 {subscribe_section(cfg)}
-{footer(cfg)}'''
+{footer(cfg, present_cats)}'''
 
     jsonld = json.dumps({"@context": "https://schema.org", "@type": "Blog",
                          "name": f'{cfg["brandName"]}', "url": cfg["domain"] + "/"})
@@ -267,38 +286,58 @@ def build_index(cfg, posts):
     (PUBLIC / "index.html").write_text(head + body + page_tail(cfg), encoding="utf-8")
 
 
-def build_archive(cfg, posts):
+def build_archive(cfg, posts, present_cats):
     total = len(posts)
-    chips = '<button class="chip" aria-pressed="true" onclick="pwArchiveFilter(this,\'all\')">All</button>'
-    groups = ""
-    for cat, color in cfg["categories"].items():
-        in_cat = [p for p in posts if p["category"] == cat]
-        if not in_cat:
-            continue
-        chips += f'<button class="chip" aria-pressed="false" onclick="pwArchiveFilter(this,\'{cat}\')">{dot(color)}{cat}</button>'
-        cards = "".join(card_html(cfg, p, i, extra=(i >= 12)) for i, p in enumerate(in_cat))
-        more = f'<button class="show-more" onclick="pwShowMore(this)">Show all {len(in_cat)} in {cat}</button>' if len(in_cat) > 12 else ""
-        groups += f'''<div class="cat-group reveal" data-cat="{cat}" id="{cat}">
-  <h3 class="cat-head">{dot(color)}{cat}<span class="cat-count">{len(in_cat)}</span></h3>
-  <div class="grid">{cards}</div>{more}</div>'''
+
+    posts_js = [{
+        "slug": p["slug"], "title": p["title"], "excerpt": p["excerpt"],
+        "category": p["category"], "tags": p["tags"], "thumb": p.get("thumb"),
+        "date": p["card_date"], "iso": p["iso"], "minutes": p["minutes"],
+    } for p in posts]
+    cat_colors = {c: cfg["categories"][c] for c in present_cats}
+    quotes = cfg.get("quotes", [])
+
+    sidebar = '''<aside class="arc-side">
+  <div class="arc-quote" id="arcQuote" aria-live="polite"></div>
+  <input type="search" id="arcSearch" class="arc-search" placeholder="Search titles, tags, places…">
+  <nav class="arc-nav" id="arcNav" aria-label="Filter by category"></nav>
+  <div class="arc-sortwrap">
+    <label class="mono" for="arcSort">Sort</label>
+    <select id="arcSort" class="arc-sort">
+      <option value="new">Newest first</option>
+      <option value="old">Oldest first</option>
+      <option value="quick">Quickest read</option>
+    </select>
+  </div>
+</aside>'''
+
+    main = '''<div class="arc-main">
+  <div class="arc-heading"><h2 id="arcHeadingTitle">All articles</h2><span class="mono" id="arcCount"></span></div>
+  <div class="arc-grid" id="arcGrid"></div>
+  <p class="arc-empty" id="arcEmpty" hidden>No articles match that search.</p>
+</div>'''
 
     body = f'''{nav(cfg, active="read")}
-<section class="section" style="padding-top:56px"><div class="wrap">
-  <div class="section-head reveal"><h2>All articles</h2><p>{total} pieces, organized by passion.</p></div>
-  <div class="filters reveal" role="group" aria-label="Filter by category">{chips}</div>
-  {groups}
+<section class="section arc-section"><div class="wrap">
+  <div class="section-head reveal"><h2>All articles</h2><p>{total} pieces — search by title, tag, or place, or browse by category.</p></div>
+  <div class="arc-layout reveal">{sidebar}{main}</div>
 </div></section>
-{footer(cfg)}'''
+{footer(cfg, present_cats)}'''
+
+    init_js = ("window.PW_POSTS=" + json.dumps(posts_js) + ";"
+               "window.PW_CATS=" + json.dumps(cat_colors) + ";"
+               "window.PW_QUOTES=" + json.dumps(quotes) + ";"
+               "pwArchiveInitV2();")
 
     jsonld = json.dumps({"@context": "https://schema.org", "@type": "CollectionPage",
                          "name": f'All articles — {cfg["brandName"]}', "url": cfg["domain"] + "/articles.html"})
     head = page_head(cfg, f'All articles — {cfg["brandName"]}',
-                     "Browse the full archive, organized by category.",
+                     "Browse the full archive by category, tag, or search.",
                      cfg["domain"] + "/articles.html", jsonld)
-    (PUBLIC / "articles.html").write_text(head + body + page_tail(cfg, "pwArchiveInit();"), encoding="utf-8")
+    (PUBLIC / "articles.html").write_text(head + body + page_tail(cfg, init_js), encoding="utf-8")
 
 
-def build_article(cfg, p):
+def build_article(cfg, p, present_cats):
     col = cfg["categories"].get(p["category"], "#999")
     header = nav(cfg)
 
@@ -323,7 +362,7 @@ def build_article(cfg, p):
 <div class="more"><div class="mono">Enjoyed this?</div>
   <p style="margin:0 0 20px;color:var(--muted)">New articles go out by email the moment they're published — free, no account needed.</p>
   <a href="index.html#subscribe"><button class="btn btn-grad">Subscribe free</button></a></div>
-{footer(cfg)}'''
+{footer(cfg, present_cats)}'''
 
     jsonld = json.dumps({"@context": "https://schema.org", "@type": "Article", "headline": p["title"],
                          "datePublished": p["iso"], "author": {"@type": "Person", "name": cfg["author"]["name"]},
@@ -349,15 +388,19 @@ def main():
         meta, body = parse_md(md_file.read_text(encoding="utf-8"))
         dt = datetime.strptime(meta["date"], "%Y-%m-%d")
         words = len(re.findall(r"\w+", body))
+        tags = [t.strip() for t in meta.get("tags", "").split(",") if t.strip()]
+        img_match = re.search(r"!\[[^\]]*\]\(([^)]+)\)", body)
         posts.append({
             "title": meta["title"], "slug": meta.get("slug", md_file.stem),
             "category": meta.get("category", "Life"), "excerpt": meta.get("excerpt", ""),
+            "tags": tags, "thumb": img_match.group(1) if img_match else None,
             "featured": str(meta.get("featured", "")).lower() == "true",
             "iso": meta["date"], "dt": dt,
             "display_date": dt.strftime("%d %b %Y"), "card_date": dt.strftime("%b %Y"),
             "minutes": max(1, round(words / 200)), "html": md_to_html(body),
         })
     posts.sort(key=lambda p: p["dt"], reverse=True)
+    present_cats = [c for c in cfg["categories"] if any(p["category"] == c for p in posts)]
 
     if PUBLIC.exists():
         shutil.rmtree(PUBLIC)
@@ -367,10 +410,10 @@ def main():
     if images_dir.exists():
         shutil.copytree(images_dir, PUBLIC / "assets" / "images")
 
-    build_index(cfg, posts)
-    build_archive(cfg, posts)
+    build_index(cfg, posts, present_cats)
+    build_archive(cfg, posts, present_cats)
     for p in posts:
-        build_article(cfg, p)
+        build_article(cfg, p, present_cats)
 
     # robots + sitemap
     (PUBLIC / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {cfg['domain']}/sitemap.xml\n", encoding="utf-8")

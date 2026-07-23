@@ -1,7 +1,8 @@
 ---
-title: How I passed the AWS Solutions Architect — Associate, June 2019
+title: Passing the AWS Solutions Architect Exam
 slug: aws-solutions-architect-associate-2019
 category: AWS
+tags: AWS, Solutions Architect, Certification, EC2, S3, IAM
 excerpt: A score, a stack of resources, and the study order I'd actually repeat — after two years of AWS and two certifications already behind me.
 date: 2019-06-09
 ---

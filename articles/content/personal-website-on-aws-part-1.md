@@ -1,7 +1,8 @@
 ---
-title: "Part 1: Create your own personal website on AWS"
+title: "Personal Website on AWS, Part 1: S3"
 slug: personal-website-on-aws-part-1
-category: How-To
+category: AWS
+tags: AWS, S3, Static Hosting
 excerpt: Skip Wix and Squarespace — host a real static site on S3 and actually understand what's happening under the hood.
 date: 2021-05-31
 ---

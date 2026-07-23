@@ -1,7 +1,8 @@
 ---
-title: "Toastmasters Prepared Speech: Self-Driving Cars"
+title: "Self-Driving Cars"
 slug: toastmasters-self-driving-cars
 category: Speaking
+tags: Public Speaking, Self-Driving Cars, Technology
 excerpt: A prepared speech on why autonomous vehicles still make the same kinds of mistakes they were built to eliminate.
 date: 2023-03-22
 ---

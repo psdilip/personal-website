@@ -1,7 +1,8 @@
 ---
-title: Your first website on S3, explained like a human
+title: Your First Website on S3
 slug: s3-website
-category: How-To
+category: AWS
+tags: AWS, S3, Static Hosting
 excerpt: A calm, copy-paste-able walkthrough to get a real site live on AWS in an afternoon — no prior cloud experience needed.
 date: 2026-07-08
 ---

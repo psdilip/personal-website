@@ -1,7 +1,8 @@
 ---
-title: Deploy Jenkins agents using EC2 Spot instances
+title: Jenkins Agents on EC2 Spot Instances
 slug: jenkins-agents-ec2-spot-instances
-category: How-To
+category: AWS
+tags: AWS, EC2, Jenkins, Spot Instances, CI/CD
 excerpt: A proof of concept for scaling Jenkins agents on spot pricing with the EC2-Fleet plugin — cheaper builds, no idle capacity.
 date: 2022-01-06
 ---

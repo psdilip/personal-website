@@ -1,7 +1,8 @@
 ---
-title: Create an AWS account from scratch
+title: Creating an AWS Account from Scratch
 slug: create-aws-account-from-scratch
-category: How-To
+category: AWS
+tags: AWS, Getting Started, IAM
 excerpt: What cloud computing actually buys you, and the exact steps to get a working AWS account and console access.
 date: 2021-05-22
 ---

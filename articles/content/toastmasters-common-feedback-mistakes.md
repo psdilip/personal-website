@@ -1,7 +1,8 @@
 ---
-title: 3 common mistakes to avoid in Toastmasters speeches
+title: 3 Common Toastmasters Mistakes
 slug: toastmasters-common-feedback-mistakes
 category: Speaking
+tags: Public Speaking, Feedback, Tips
 excerpt: The two pieces of feedback that come up again and again — from 15 of my own speeches and watching 50 more.
 date: 2023-07-27
 ---

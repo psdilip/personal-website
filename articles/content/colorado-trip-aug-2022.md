@@ -1,7 +1,8 @@
 ---
-title: "Epic Adventures in Colorado's Playground"
+title: "Colorado's Playground: Rockies to Red Rocks"
 slug: colorado-trip-aug-2022
 category: Travel
+tags: Colorado, Rocky Mountain National Park, Mount Evans, Red Rocks
 excerpt: Four days in Colorado — Rocky Mountain National Park, the summit of Mount Evans, and Red Rocks on the way out.
 date: 2023-03-24
 ---

@@ -1,7 +1,8 @@
 ---
-title: "Navigating New York: My Work Week Itinerary"
+title: "A Work Week in New York"
 slug: navigating-new-york-work-week
 category: Travel
+tags: New York, Work Travel, Manhattan
 excerpt: A work trip to New York that still found room for hot yoga, ice skating at Rockefeller Center, and a lot of very good food.
 date: 2023-08-08
 ---

@@ -1,7 +1,8 @@
 ---
-title: Starting out on your AWS journey? Here is what I learned
+title: Starting Your AWS Journey
 slug: starting-out-on-your-aws-journey
 category: AWS
+tags: AWS, Career, Certifications, Learning
 excerpt: Lessons from a few years in the cloud — on learning deliberately, troubleshooting with intent, and treating a career as a process instead of a checklist.
 date: 2021-11-26
 ---

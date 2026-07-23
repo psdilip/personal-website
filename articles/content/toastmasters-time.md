@@ -1,7 +1,8 @@
 ---
-title: "Toastmasters Prepared Speech: Time"
+title: "On Time"
 slug: toastmasters-time
 category: Speaking
+tags: Public Speaking, Time, Philosophy
 excerpt: A prepared speech on the one resource everyone has an opinion about and almost no one actually understands.
 date: 2023-03-22
 ---

@@ -1,7 +1,8 @@
 ---
-title: Download Chrome using Internet Explorer on Windows Server 2019
+title: Getting Chrome onto Windows Server 2019
 slug: download-chrome-ie-windows-server-2019
 category: How-To
+tags: Windows Server, Internet Explorer, Chrome
 excerpt: A fresh Windows Server 2019 box only comes with Internet Explorer — here's how to get Chrome onto it without a fight.
 date: 2022-02-17
 ---

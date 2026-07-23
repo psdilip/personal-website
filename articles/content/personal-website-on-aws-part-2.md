@@ -1,7 +1,8 @@
 ---
-title: "Part 2: Add a CloudFront distribution, buy a domain, and request an SSL certificate"
+title: "Personal Website on AWS, Part 2: CloudFront & SSL"
 slug: personal-website-on-aws-part-2
-category: How-To
+category: AWS
+tags: AWS, CloudFront, Route 53, SSL
 excerpt: Turn the bare S3 site from Part 1 into a real HTTPS site on your own domain, served fast from CloudFront's edge network.
 date: 2021-05-31
 ---

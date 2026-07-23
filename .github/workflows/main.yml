@@ -20,13 +20,6 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: us-east-1
-      - name: Build Passionwaves Media
-        run: |
-          cd articles
-          python3 build.py
-      - name: Deploy Passionwaves Media to S3 (/articles)
-        run: |
-          aws s3 sync ./articles/public s3://${{ secrets.S3_BUCKET_NAME }}/articles --delete
       - name: Deploy portfolio to S3 (root)
         run: |
           aws s3 cp ./index.html s3://${{ secrets.S3_BUCKET_NAME }}/index.html

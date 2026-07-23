@@ -6,13 +6,15 @@ Edit it in any text editor, re-upload, done.
 ## Editing
 Everything editable is marked with `EDIT:` comments in the source.
 - **Name** — appears in `<title>`, the top-bar brand, and the footer.
-- **Links** — LinkedIn, email, Medium, GitHub, and the résumé PDF (top-bar "Résumé").
-  Currently placeholders (`your-handle`, `you@example.com`).
-- **Sections** — Focus, Work, Experience, Writing, Certifications, Education.
-  Duplicate a card / row / timeline block to add an item.
+- **Links** — LinkedIn, email, and GitHub. Currently placeholders (`your-handle`, `you@example.com`).
+- **Sections** — Focus, Work, Writing, Certifications, Education, Beyond the cloud, Toolkit.
+  Duplicate a card / row / tag block to add an item.
 - **Colors & fonts** — the `:root` token block at the top. Change the accent once, it flows everywhere.
 - **Left rail** — section labels live in the `SECTIONS` list in the script; keep it in sync if you rename or add a section.
 - **Hero motif** — tune `CALM` (drift speed), `FADE` (opacity), and `gap` (spacing) in script block 5.
+- **Writing section** — links out to PassionWaves Media, a separate site/repo (`github.com/psdilip/passionwavesmedia`)
+  with its own S3 bucket and deploy workflow. The `https://passionwaves.media` links here are a placeholder until
+  that site has a real domain.
 
 Keep client names out of the Work section unless you have approval.
 

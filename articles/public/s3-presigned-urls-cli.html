@@ -229,13 +229,14 @@ a{ color:inherit; text-decoration:none; }
 <article>
   <div class="article a-head">
     <a href="index.html#read" class="back">← All articles</a>
-    <div class="kicker mono"><span class="dot" style="background:#FF6B4A"></span>How-To · 2 min read · 18 May 2022</div>
+    <div class="kicker mono"><span class="dot" style="background:#FF6B4A"></span>How-To · 3 min read · 18 May 2022</div>
     <h1>How to create presigned URLs for objects in a private AWS S3 bucket using the AWS CLI</h1>
     <p class="dek">A walkthrough for sharing a single private S3 object temporarily — no public bucket required.</p>
     <div class="byline"><div class="avatar"></div><div class="who"><b>Your Name</b><br><span>PassionWavesMedia</span></div></div>
   </div>
   <div class="article"><div class="hero-art"><div class="caption mono">How-To</div></div>
-    <div class="prose"><p>AWS Support puts it plainly: "If you are using presigned URLs, you don't need to make the bucket public, and in fact, it may be better not to." That's the whole appeal — you get to share one object, for a limited time, without opening the bucket up.</p>
+    <div class="prose"><p><img src="https://miro.medium.com/v2/resize:fit:1400/0<em>yv7UhxzgMNL6QFvx" alt="Photo by Scott Graham on Unsplash"> </em>Photo by Scott Graham on Unsplash*</p>
+<p>AWS Support puts it plainly: "If you are using presigned URLs, you don't need to make the bucket public, and in fact, it may be better not to." That's the whole appeal — you get to share one object, for a limited time, without opening the bucket up.</p>
 <h3>Why you'd want this</h3>
 <p>S3 is cheap enough that storage usage tends to grow past its original purpose. Two examples that come up a lot:</p>
 <ul><li>A delivery photo gets dropped into S3 the moment a package arrives, and the link to it should expire after a set window.</li><li>An ETL job extracts a customer's data into an S3 object, and you want to hand them a link that works for a day, not forever.</li></ul>

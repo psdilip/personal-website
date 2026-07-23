@@ -6,6 +6,9 @@ excerpt: Why the original instance metadata service was a security gap, and the 
 date: 2022-02-16
 ---
 
+![Photo by Christina @ wocintechchat.com on Unsplash](https://miro.medium.com/v2/resize:fit:1400/0*GZbP2GiCu3cI00Yw)
+*Photo by Christina @ wocintechchat.com on Unsplash*
+
 Every EC2 instance exposes a metadata service — identity credentials, IAM info, metrics, public keys, security groups — but only from inside that instance. The catch: if someone ever gets a foothold on the instance itself, that data is theirs too.
 
 ### The two versions

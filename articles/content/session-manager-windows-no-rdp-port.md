@@ -6,6 +6,9 @@ excerpt: Get shell and RDP access to a Windows EC2 instance through Systems Mana
 date: 2022-01-01
 ---
 
+![Photo by Christina @ wocintechchat.com on Unsplash](https://miro.medium.com/v2/resize:fit:1400/0*Sl3gnlPFQn9Q-8On)
+*Photo by Christina @ wocintechchat.com on Unsplash*
+
 Session Manager, part of AWS Systems Manager, gives you controlled, secure shell access to a Windows or Linux instance without ever opening a port in the security group. Here's how to use it to reach a Windows box — including RDP — without 3389 open to the world.
 
 ### What this walkthrough assumes

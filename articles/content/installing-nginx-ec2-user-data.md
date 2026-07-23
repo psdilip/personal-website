@@ -6,6 +6,9 @@ excerpt: Stand up an Nginx web server on a fresh EC2 instance with nothing but a
 date: 2022-01-02
 ---
 
+![Photo by Sigmund on Unsplash](https://miro.medium.com/v2/resize:fit:1400/0*qRqceqwia11U1lJP)
+*Photo by Sigmund on Unsplash*
+
 Nginx is an open-source web server that also handles reverse proxying, caching, load balancing, media streaming, and logging. Here's how to get it running on EC2 with zero manual setup, using nothing but the instance's user data.
 
 ### A few terms, quickly

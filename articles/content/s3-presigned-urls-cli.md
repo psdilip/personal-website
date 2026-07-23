@@ -6,6 +6,9 @@ excerpt: A walkthrough for sharing a single private S3 object temporarily — no
 date: 2022-05-18
 ---
 
+![Photo by Scott Graham on Unsplash](https://miro.medium.com/v2/resize:fit:1400/0*yv7UhxzgMNL6QFvx)
+*Photo by Scott Graham on Unsplash*
+
 AWS Support puts it plainly: "If you are using presigned URLs, you don't need to make the bucket public, and in fact, it may be better not to." That's the whole appeal — you get to share one object, for a limited time, without opening the bucket up.
 
 ### Why you'd want this

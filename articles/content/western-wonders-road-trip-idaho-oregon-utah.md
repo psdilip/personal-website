@@ -6,6 +6,9 @@ excerpt: A seven-day drive through Idaho, Oregon, and Utah — waterfalls, a mou
 date: 2023-10-01
 ---
 
+![Photo by Ben Hoskyn on Unsplash](https://miro.medium.com/v2/resize:fit:1400/0*eUWkxe3m8yQ2PDqV)
+*Photo by Ben Hoskyn on Unsplash*
+
 Seven days, three states, one Turo rental car. A day-by-day log of a loop through Boise, the Wallowa Mountains, Twin Falls, and Salt Lake City.
 
 ### Day 1 — Thursday
@@ -21,6 +24,7 @@ Seven days, three states, one Turo rental car. A day-by-day log of a loop throug
 - Picked up the Turo rental car at the airport
 - Checked into the Airbnb
 
+![Drone shot of downtown Boise from Table Rock](assets/images/western-wonders-road-trip-idaho-oregon-utah/01-boise-downtown.jpg)
 *Drone shot of downtown Boise from Table Rock.*
 
 ### Day 2 — Friday
@@ -48,6 +52,9 @@ Seven days, three states, one Turo rental car. A day-by-day log of a loop throug
 - Rode the tramway up to Mt. Howard
 - Kayaked at Wallowa Lake
 
+![Drone shot of Wallowa Lake](assets/images/western-wonders-road-trip-idaho-oregon-utah/02-wallowa-lake.jpg)
+
+![Wallowa Mountain Range](assets/images/western-wonders-road-trip-idaho-oregon-utah/03-wallowa-mountain-range.jpg)
 *Drone shot of Wallowa Lake and the surrounding mountain range.*
 
 ### Day 4 — Sunday
@@ -61,6 +68,7 @@ Seven days, three states, one Turo rental car. A day-by-day log of a loop throug
 - Drove from Pendleton, Oregon to Twin Falls, Idaho
 - Visited the Perrine Bridge
 
+![Drone shot of the Perrine Memorial Bridge](assets/images/western-wonders-road-trip-idaho-oregon-utah/04-perrine-bridge.jpg)
 *Drone shot of the Perrine Memorial Bridge.*
 
 ### Day 5 — Monday
@@ -75,9 +83,15 @@ Seven days, three states, one Turo rental car. A day-by-day log of a loop throug
 - Visited Shoshone Falls and Lake Cleveland
 - Drove from Twin Falls to Salt Lake City
 
+![Drone shot of Shoshone Falls](assets/images/western-wonders-road-trip-idaho-oregon-utah/05-shoshone-falls.jpg)
+
+![Drone shot of Lake Cleveland](assets/images/western-wonders-road-trip-idaho-oregon-utah/06-lake-cleveland.jpg)
 *Drone shot of Shoshone Falls and Lake Cleveland.*
 
 ### Day 6 — Tuesday
+
+![Salt Lake City — Photo by Saul Flores on Unsplash](https://miro.medium.com/v2/resize:fit:1400/0*ZKpI5FzcsvzfGPsE)
+*Salt Lake City — Photo by Saul Flores on Unsplash*
 
 **Meals:**
 - Breakfast: Leftover Prohibition
@@ -88,6 +102,9 @@ Seven days, three states, one Turo rental car. A day-by-day log of a loop throug
 - Drove from Salt Lake City, Utah back to Boise, Idaho
 
 ### Day 7 — Wednesday
+
+![Photo by Cedric Letsch on Unsplash](https://miro.medium.com/v2/resize:fit:1400/0*XxIUH54pKEaIg_Gc)
+*Photo by Cedric Letsch on Unsplash*
 
 **Meals:**
 - Lunch: Garbanzo Mediterranean Fresh at SLC Airport

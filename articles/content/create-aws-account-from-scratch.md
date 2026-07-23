@@ -6,6 +6,9 @@ excerpt: What cloud computing actually buys you, and the exact steps to get a wo
 date: 2021-05-22
 ---
 
+![Photo by Antonio Scalogna on Unsplash](https://miro.medium.com/v2/resize:fit:1400/0*1eRPSCZz9MMzTOLz)
+*Photo by Antonio Scalogna on Unsplash*
+
 If you're starting a cloud journey, or just want to understand what all the fuss is about, AWS is a reasonable place to start — it's held the top spot in cloud market share for over a decade and is still one of the fastest-growing cloud businesses out there.
 
 ### What "the cloud" actually is
@@ -45,6 +48,9 @@ Databases, virtual servers, file systems, and 200+ other services covering every
 14. Enter the email you signed up with
 15. Complete the security check
 16. Enter your password
+
+![Photo by Dallas Reedy on Unsplash](https://miro.medium.com/v2/resize:fit:1400/0*fsuopVuXjciAw3W2)
+*Photo by Dallas Reedy on Unsplash*
 
 ### Where to go next
 

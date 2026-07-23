@@ -6,6 +6,9 @@ excerpt: A score, a stack of resources, and the study order I'd actually repeat 
 date: 2019-06-09
 ---
 
+![Photo by Brandi Redd on Unsplash](https://miro.medium.com/v2/resize:fit:1400/0*HHN6ZsSZ_tO-SnhF)
+*Photo by Brandi Redd on Unsplash*
+
 Going in, I had about two years of AWS experience and already held the Cloud Practitioner and Developer certifications. Even with that background, I spent roughly six months preparing for this one. I walked out with an 855/1000 — and it was harder than I expected going in.
 
 ### The exam itself

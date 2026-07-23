@@ -6,6 +6,9 @@ excerpt: A prepared speech on why autonomous vehicles still make the same kinds 
 date: 2023-03-22
 ---
 
+![Photo by Roberto Nickson on Unsplash](https://miro.medium.com/v2/resize:fit:1400/0*ugMjEQ7ahqw1kkwT)
+*Photo by Roberto Nickson on Unsplash*
+
 > If Apple came out with a self-driving car, would it have Windows?
 
 **What is a self-driving car?** A vehicle designed to be self-aware and make decisions on its own — you tell it "take me to work," and in theory it handles the rest.

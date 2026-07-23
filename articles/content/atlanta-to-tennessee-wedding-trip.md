@@ -6,6 +6,9 @@ excerpt: A friend's wedding in the Smokies, bookended by an overnight drive in e
 date: 2023-07-06
 ---
 
+![Drone shot of House Mountain](assets/images/atlanta-to-tennessee-wedding-trip/01-house-mountain.jpg)
+*Drone shot of House Mountain*
+
 Four days, one wedding, and a rental car that saw more of the Smoky Mountains than I did.
 
 ### Day 1 — Friday
@@ -22,6 +25,9 @@ Four days, one wedding, and a rental car that saw more of the Smoky Mountains th
 
 ### Day 2 — Saturday
 
+![Sunsphere](assets/images/atlanta-to-tennessee-wedding-trip/02-sunsphere.jpg)
+*Sunsphere at World's Fair Park*
+
 **Meals:**
 - Lunch: Cava
 - Dinner: The Tomato Head — vegan sandwich, pizza, and a chocolate chip cookie
@@ -33,6 +39,9 @@ Four days, one wedding, and a rental car that saw more of the Smoky Mountains th
 - Visited the Sunsphere at World's Fair Park
 
 ### Day 3 — Sunday
+
+![The Island at Pigeon Forge](assets/images/atlanta-to-tennessee-wedding-trip/03-island-at-pigeon-forge.jpg)
+*The Island at Pigeon Forge*
 
 **Meals:**
 - Lunch: Taco Bell — spicy potato soft tacos, black bean crunchwrap supreme
@@ -46,6 +55,9 @@ Four days, one wedding, and a rental car that saw more of the Smoky Mountains th
 
 ### Day 4 — Monday
 
+![The Magnolia Wedding Venue](assets/images/atlanta-to-tennessee-wedding-trip/04-magnolia-wedding-venue.jpg)
+*The Magnolia Wedding Venue*
+
 **Meals:**
 - Dinner: The wedding itself
 
@@ -55,6 +67,9 @@ Four days, one wedding, and a rental car that saw more of the Smoky Mountains th
 - Started the overnight drive back to Atlanta through the Smokies
 
 ### Day 5 — Tuesday
+
+![Photo by Aaron Burden on Unsplash](https://miro.medium.com/v2/resize:fit:1400/0*UYEEKfD_qT2Z4LU8)
+*Photo by Aaron Burden on Unsplash*
 
 **Meals:**
 - Breakfast: Gas station snacks

@@ -6,6 +6,9 @@ excerpt: Turn the bare S3 site from Part 1 into a real HTTPS site on your own do
 date: 2021-05-31
 ---
 
+![Photo by Christopher Gower on Unsplash](https://miro.medium.com/v2/resize:fit:1400/0*hcu8vevpyXv2nG0K)
+*Photo by Christopher Gower on Unsplash*
+
 This picks up right where [Part 1](/personal-website-on-aws-part-1.html) left off — a working static site on S3, but on an ugly S3 URL with no HTTPS. Three services fix that: CloudFront, Route 53, and AWS Certificate Manager.
 
 ### Setting up CloudFront

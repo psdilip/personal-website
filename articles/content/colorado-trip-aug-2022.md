@@ -10,6 +10,8 @@ Four days built around two mountains: Rocky Mountain National Park and Mount Eva
 
 ### Day 1 — Thursday
 
+![Day 1 overview](assets/images/colorado-trip-aug-2022/01-day1.jpg)
+
 **Meals:** Homemade lunch · dinner at a friend's place
 
 **Stay:** Baymont by Wyndham, Denver International Airport
@@ -32,7 +34,14 @@ Four days built around two mountains: Rocky Mountain National Park and Mount Eva
 - Takeout from The Rock Inn Mountain Tavern
 - Walked to Emerald Lake before driving on to Granby
 
+![Day 2 overview](assets/images/colorado-trip-aug-2022/02-day2.jpg)
+
+![Dream Lake](assets/images/colorado-trip-aug-2022/03-dream-lake.jpg)
+*Dream Lake*
+
 ### Day 3 — Saturday
+
+![Day 3 overview](assets/images/colorado-trip-aug-2022/04-day3.jpg)
 
 **Meals:** Instant oatmeal for breakfast · Subway for lunch · Tommyknocker Brewery & Pub for dinner
 
@@ -45,7 +54,12 @@ Four days built around two mountains: Rocky Mountain National Park and Mount Eva
 - Hiked the M. Walter Pesman Trail
 - Dinner at Tommyknocker Brewery & Pub
 
+![View from Mount Evans](assets/images/colorado-trip-aug-2022/05-view-from-mount-evans.jpg)
+*View from Mount Evans*
+
 ### Day 4 — Sunday
+
+![Day 4 overview](assets/images/colorado-trip-aug-2022/06-day4.jpg)
 
 **Meals:** Vegan French toast from the Airbnb host · lunch at The Golden Mill · dinner at home
 

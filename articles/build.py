@@ -363,6 +363,10 @@ def main():
         shutil.rmtree(PUBLIC)
     PUBLIC.mkdir()
 
+    images_dir = ROOT / "assets" / "images"
+    if images_dir.exists():
+        shutil.copytree(images_dir, PUBLIC / "assets" / "images")
+
     build_index(cfg, posts)
     build_archive(cfg, posts)
     for p in posts:

@@ -6,6 +6,9 @@ excerpt: A prepared speech on the one resource everyone has an opinion about and
 date: 2023-03-22
 ---
 
+![Photo by Aron Visuals on Unsplash](https://miro.medium.com/v2/resize:fit:1400/0*Dy3pQ99mNbsIQ_Yd)
+*Photo by Aron Visuals on Unsplash*
+
 If you own enough watches, I guess that just means you've got a lot of time on your hands.
 
 Time is strange when you actually sit with it. You can't see it, feel it, or hear it, and yet it's in every thought you have. It structures the whole day — the alarm, the appointments, the meetings — and we still don't really understand it.

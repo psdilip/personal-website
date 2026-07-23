@@ -6,6 +6,9 @@ excerpt: Skip Wix and Squarespace — host a real static site on S3 and actually
 date: 2021-05-31
 ---
 
+![Photo by John Schnobrich on Unsplash](https://miro.medium.com/v2/resize:fit:1400/0*sy3DbaNstc2e_k8Q)
+*Photo by John Schnobrich on Unsplash*
+
 Wix, Squarespace, and WordPress will get you a website faster, but building one on S3 teaches you something those platforms hide from you entirely. This isn't a design tutorial — it's the infrastructure underneath.
 
 This is Part 1 of two: this half covers the bare-minimum S3 setup. [Part 2](/personal-website-on-aws-part-2.html) adds a custom domain, SSL, and CloudFront.
